@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دار النخبة الفاخرة | Elite Maison | Official Boutique</title>
+  
+  <!-- Salla Mock Twilight Runtime Header -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --luxury-primary: #1A1A1A;
+      --luxury-accent: #D4AF37;
+      --luxury-bg: #FAF9F6;
+      --luxury-surface: #FFFFFF;
+      --luxury-border: #E5E2DC;
+      --luxury-text: #1C1B1A;
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-display: 'Cormorant Garamond', serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--luxury-bg);
+      color: var(--luxury-text);
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .skip-to-content:focus {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 9999;
+      padding: 0.75rem 1.25rem;
+      background: var(--luxury-primary);
+      color: #FFFFFF;
+      border: 1px solid var(--luxury-accent);
+      outline: 2px solid var(--luxury-accent);
+    }
+  </style>
+
+  <script>
+    // Custom Element Web Component polyfills for offline Salla preview
+    class SallaCartSummary extends HTMLElement {
+      connectedCallback() {
+        this.innerHTML = `
+          <button class="relative p-2 text-stone-700 hover:text-stone-950 flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span class="text-xs font-semibold">${this.getAttribute('data-lang') === 'en' ? 'Cart' : 'السلة'}</span>
+            <span class="inline-flex items-center justify-center px-1.5 py-0.5 text-[10px] font-bold bg-amber-500 text-stone-950 rounded-full">2</span>
+          </button>
+        `;
+      }
+    }
+    customElements.define('salla-cart-summary', SallaCartSummary);
+
+    class SallaAddProductButton extends HTMLElement {
+      connectedCallback() {
+        const btn = this.querySelector('button');
+        if (btn) {
+          btn.addEventListener('click', () => {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => toast.classList.add('opacity-0', 'pointer-events-none'), 2500);
+          });
+        }
+      }
+    }
+    customElements.define('salla-add-product-button', SallaAddProductButton);
+  </script>
+</head>
+<body class="flex flex-col min-h-screen">
+  <a href="#main-content" class="sr-only skip-to-content">
+    Skip to primary content
+  </a>
+
+  <!-- Header -->
+  <header role="banner" class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="/" class="flex items-center gap-3">
+          <span class="text-2xl font-bold tracking-tight text-stone-900" style="font-family: var(--font-display);">
+            ELITE MAISON
+          </span>
+        </a>
+        <nav role="navigation" class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a href="/" class="text-stone-900 font-semibold">Home</a>
+          <a href="/categories" class="text-stone-600 hover:text-stone-950 transition-colors">Private Reserve</a>
+          <a href="/offers" class="text-stone-600 hover:text-stone-950 transition-colors">Exclusives</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <a href="preview-ar.html" class="text-xs uppercase tracking-wider px-2.5 py-1 border border-stone-300 hover:border-stone-800 transition-colors">
+          عربي (RTL)
+        </a>
+        <salla-cart-summary data-lang="en"></salla-cart-summary>
+        <button class="text-xs uppercase tracking-widest px-3 py-2 bg-stone-900 text-white hover:bg-stone-800 transition-colors">
+          Account
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" role="main" class="flex-grow">
+    <!-- Component: Luxury Hero Banner 2.0 -->
+    <section aria-label="الفخامة في تفاصيلها النادرة" class="relative w-full overflow-hidden bg-stone-900 text-white">
+      <picture class="absolute inset-0 w-full h-full">
+        <source media="(min-width: 768px)" srcset="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=85">
+        <source media="(max-width: 767px)" srcset="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=85">
+        <img 
+          src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=85" 
+          alt="عارضة أزياء ترتدي فستاناً مخملياً أسود من المجموعة الفاخرة" 
+          class="w-full h-full object-cover object-center select-none"
+          loading="eager"
+          decoding="async"
+          width="1920"
+          height="1080"
+        >
+      </picture>
+
+      <div class="absolute inset-0 bg-stone-950 transition-opacity duration-300" style="opacity: 0.4;" aria-hidden="true"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent" aria-hidden="true"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-44 flex flex-col items-center text-center justify-center min-h-[500px] sm:min-h-[600px] lg:min-h-[680px]">
+        <span class="inline-block text-xs sm:text-sm font-semibold tracking-widest uppercase text-amber-300 mb-3 px-3 py-1 bg-black/50 backdrop-blur-sm border border-amber-300/30">
+          Winter 2026 Private Reserve
+        </span>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white max-w-3xl leading-tight mb-4 drop-shadow-sm" style="font-family: var(--font-display);">
+          Timeless Luxury, Crafted to Perfection
+        </h1>
+        <p class="text-base sm:text-lg lg:text-xl text-stone-200 max-w-2xl font-light mb-8 leading-relaxed drop-shadow">
+          Handpicked rare pieces designed for discerning connoisseurs.
+        </p>
+        <div class="pt-2">
+          <a href="/categories/private-reserve" class="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold tracking-wider uppercase text-stone-900 bg-white hover:bg-amber-100 transition-colors shadow-lg focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-400">
+            <span>Explore Collection</span>
+            <svg class="w-4 h-4 ms-2 " fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Curated Collection Grid with Verified Product Fixtures -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-amber-700 font-semibold mb-2 block">
+            Seasonal Curations
+          </span>
+          <h2 class="text-3xl font-bold tracking-tight text-stone-900" style="font-family: var(--font-display);">
+            Exclusive Masterpieces
+          </h2>
+        </div>
+        <a href="/categories" class="mt-4 md:mt-0 text-sm font-medium text-stone-800 hover:text-amber-800 flex items-center gap-1 group">
+          <span>View Full Catalog</span>
+          <span class="inline-block transition-transform group-hover:translate-x-1">&rarr;</span>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+          <article class="group relative bg-white border border-stone-200 overflow-hidden flex flex-col justify-between transition-all hover:shadow-xl hover:-translate-y-1 duration-300">
+            <div class="relative aspect-[3/4] bg-stone-100 overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=85" 
+                alt="عباية مخملية سوداء بتطريز خيوط الحرير" 
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+                width="400"
+                height="533"
+              >
+              
+                <span class="absolute top-3 start-3 bg-stone-950 text-amber-300 text-[10px] font-semibold tracking-widest px-2.5 py-1 border border-amber-300/30">
+                  إصدار حصري
+                </span>
+              
+            </div>
+            
+            <div class="p-5 flex flex-col flex-grow justify-between">
+              <div>
+                <span class="text-[11px] font-medium text-amber-800 uppercase tracking-wider block mb-1">الأزياء الفاخرة</span>
+                <h3 class="text-sm font-semibold text-stone-900 line-clamp-1 mb-1">
+                  <a href="/products/cashmere-velvet-abaya" class="hover:underline">عباية مخمل كشميري مطرزة يدويًا</a>
+                </h3>
+                <p class="text-xs text-stone-500 mb-4 line-clamp-2">قطعة فريدة بإصدار محدود مرقمة من 1 إلى 50</p>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-stone-100">
+                <span class="text-sm font-bold text-stone-900">
+                  1,850.00 SAR
+                </span>
+                <salla-add-product-button product-id="101" product-status="sale">
+                  <button type="button" class="text-xs font-semibold px-3 py-2 bg-stone-900 text-white hover:bg-stone-800 transition-colors focus:ring-2 focus:ring-amber-500">
+                    Add to Cart
+                  </button>
+                </salla-add-product-button>
+              </div>
+            </div>
+          </article>
+        
+          <article class="group relative bg-white border border-stone-200 overflow-hidden flex flex-col justify-between transition-all hover:shadow-xl hover:-translate-y-1 duration-300">
+            <div class="relative aspect-[3/4] bg-stone-100 overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=600&q=85" 
+                alt="زجاجة عطر فاخرة من الكريستال بتفاصيل ذهبية" 
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+                width="400"
+                height="533"
+              >
+              
+                <span class="absolute top-3 start-3 bg-stone-950 text-amber-300 text-[10px] font-semibold tracking-widest px-2.5 py-1 border border-amber-300/30">
+                  الأكثر طلباً
+                </span>
+              
+            </div>
+            
+            <div class="p-5 flex flex-col flex-grow justify-between">
+              <div>
+                <span class="text-[11px] font-medium text-amber-800 uppercase tracking-wider block mb-1">العطور الخاصة</span>
+                <h3 class="text-sm font-semibold text-stone-900 line-clamp-1 mb-1">
+                  <a href="/products/royal-oud-extract" class="hover:underline">عطر العود الملكي المعتّق 100 مل</a>
+                </h3>
+                <p class="text-xs text-stone-500 mb-4 line-clamp-2">مستخلص من دهن العود الكمبودي النادر ونفحات العنبر</p>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-stone-100">
+                <span class="text-sm font-bold text-stone-900">
+                  1,250.00 SAR
+                </span>
+                <salla-add-product-button product-id="102" product-status="sale">
+                  <button type="button" class="text-xs font-semibold px-3 py-2 bg-stone-900 text-white hover:bg-stone-800 transition-colors focus:ring-2 focus:ring-amber-500">
+                    Add to Cart
+                  </button>
+                </salla-add-product-button>
+              </div>
+            </div>
+          </article>
+        
+          <article class="group relative bg-white border border-stone-200 overflow-hidden flex flex-col justify-between transition-all hover:shadow-xl hover:-translate-y-1 duration-300">
+            <div class="relative aspect-[3/4] bg-stone-100 overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=85" 
+                alt="حقيبة يد جلدية فاخرة باللون البني العسلي" 
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+                width="400"
+                height="533"
+              >
+              
+                <span class="absolute top-3 start-3 bg-stone-950 text-amber-300 text-[10px] font-semibold tracking-widest px-2.5 py-1 border border-amber-300/30">
+                  مقتنيات نادرة
+                </span>
+              
+            </div>
+            
+            <div class="p-5 flex flex-col flex-grow justify-between">
+              <div>
+                <span class="text-[11px] font-medium text-amber-800 uppercase tracking-wider block mb-1">المقتنيات الجلدية</span>
+                <h3 class="text-sm font-semibold text-stone-900 line-clamp-1 mb-1">
+                  <a href="/products/artisan-leather-tote" class="hover:underline">حقيبة يد جلد طبيعي هيرمس كلاسيك</a>
+                </h3>
+                <p class="text-xs text-stone-500 mb-4 line-clamp-2">صناعة إيطالية يدوية من جلد العجل المحبب</p>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-stone-100">
+                <span class="text-sm font-bold text-stone-900">
+                  3,400.00 SAR
+                </span>
+                <salla-add-product-button product-id="103" product-status="sale">
+                  <button type="button" class="text-xs font-semibold px-3 py-2 bg-stone-900 text-white hover:bg-stone-800 transition-colors focus:ring-2 focus:ring-amber-500">
+                    Add to Cart
+                  </button>
+                </salla-add-product-button>
+              </div>
+            </div>
+          </article>
+        
+          <article class="group relative bg-white border border-stone-200 overflow-hidden flex flex-col justify-between transition-all hover:shadow-xl hover:-translate-y-1 duration-300">
+            <div class="relative aspect-[3/4] bg-stone-100 overflow-hidden">
+              <img 
+                src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=85" 
+                alt="طقم شاي فاخر من البورسلين بنقوش ذهبية" 
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+                width="400"
+                height="533"
+              >
+              
+            </div>
+            
+            <div class="p-5 flex flex-col flex-grow justify-between">
+              <div>
+                <span class="text-[11px] font-medium text-amber-800 uppercase tracking-wider block mb-1">الديكور والمقتنيات</span>
+                <h3 class="text-sm font-semibold text-stone-900 line-clamp-1 mb-1">
+                  <a href="/products/imperial-tea-set" class="hover:underline">طقم شاي بورسلين مطلي بذهب عيار 24</a>
+                </h3>
+                <p class="text-xs text-stone-500 mb-4 line-clamp-2">تصميم هندسي مستوحى من النقوش الإسلامية الأندلسية</p>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-stone-100">
+                <span class="text-sm font-bold text-stone-900">
+                  980.00 SAR
+                </span>
+                <salla-add-product-button product-id="104" product-status="sale">
+                  <button type="button" class="text-xs font-semibold px-3 py-2 bg-stone-900 text-white hover:bg-stone-800 transition-colors focus:ring-2 focus:ring-amber-500">
+                    Add to Cart
+                  </button>
+                </salla-add-product-button>
+              </div>
+            </div>
+          </article>
+        
+      </div>
+    </section>
+  </main>
+
+  <footer role="contentinfo" class="bg-stone-950 text-stone-300 py-16 border-t border-stone-800 mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div>
+        <h3 class="text-white text-lg font-semibold mb-4" style="font-family: var(--font-display);">دار النخبة الفاخرة | Elite Maison</h3>
+        <p class="text-stone-400 text-sm leading-relaxed max-w-sm">علامة تجارية سعودية رائدة في تصميم الأزياء الراقية والمقتنيات الحصرية.</p>
+      </div>
+      <div>
+        <h4 class="text-white text-sm uppercase tracking-wider mb-4">Client Care</h4>
+        <ul class="space-y-2 text-sm text-stone-400">
+          <li><a href="#" class="hover:text-white">Order Tracking</a></li>
+          <li><a href="#" class="hover:text-white">Shipping & Delivery</a></li>
+          <li><a href="#" class="hover:text-white">Returns & Exchanges</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white text-sm uppercase tracking-wider mb-4">Secured Transactions</h4>
+        <p class="text-xs text-stone-400 leading-relaxed mb-4">Protected by enterprise Salla Pro encryption.</p>
+        <span class="text-xs text-stone-500">Mada / Visa / Apple Pay</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mock Toast for Salla Add-to-Cart event -->
+  <aside id="toast" role="status" aria-live="polite" class="fixed bottom-6 end-6 z-50 bg-stone-900 text-white px-5 py-3.5 shadow-2xl border border-amber-400/40 flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none">
+    <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+    <span class="text-xs font-medium">Product added to cart successfully</span>
+  </aside>
+</body>
+</html>

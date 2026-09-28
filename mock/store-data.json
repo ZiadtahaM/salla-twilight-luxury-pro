@@ -1,0 +1,108 @@
+{
+  "store": {
+    "name": "دار النخبة الفاخرة | Elite Maison",
+    "description": "علامة تجارية سعودية رائدة في تصميم الأزياء الراقية والمقتنيات الحصرية.",
+    "url": "https://elitemaison.sa",
+    "logo": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=300&q=80"
+  },
+  "user": {
+    "is_logged_in": false,
+    "name": null,
+    "language": {
+      "code": "ar",
+      "dir": "rtl",
+      "name": "العربية"
+    }
+  },
+  "theme": {
+    "settings": {
+      "luxury_theme_palette": "#1A1A1A",
+      "luxury_secondary_accent": "#D4AF37",
+      "luxury_font_family": "cormorant-ibm"
+    }
+  },
+  "banner_component": {
+    "fields": {
+      "eyebrow": "مجموعة شتاء 2026 الحصرية",
+      "title": "الفخامة في تفاصيلها النادرة",
+      "subtitle": "تصاميم أصيلة تجمع بين التراث الحرفي والخطوط المعاصرة، مصاغة بأرقى الخامات العالمية.",
+      "desktop_image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=85",
+      "mobile_image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=85",
+      "image_alt": "عارضة أزياء ترتدي فستاناً مخملياً أسود من المجموعة الفاخرة",
+      "cta_label": "اكتشف المجموعة الخاصة",
+      "cta_url": "/categories/private-reserve",
+      "overlay_opacity": 40,
+      "text_alignment": "center"
+    }
+  },
+  "products": [
+    {
+      "id": 101,
+      "name": "عباية مخمل كشميري مطرزة يدويًا",
+      "subtitle": "قطعة فريدة بإصدار محدود مرقمة من 1 إلى 50",
+      "url": "/products/cashmere-velvet-abaya",
+      "price": 1850.00,
+      "currency": "SAR",
+      "status": "sale",
+      "promotion_title": "إصدار حصري",
+      "image": {
+        "url": "https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=600&q=85",
+        "alt": "عباية مخملية سوداء بتطريز خيوط الحرير"
+      },
+      "category": {
+        "name": "الأزياء الفاخرة"
+      }
+    },
+    {
+      "id": 102,
+      "name": "عطر العود الملكي المعتّق 100 مل",
+      "subtitle": "مستخلص من دهن العود الكمبودي النادر ونفحات العنبر",
+      "url": "/products/royal-oud-extract",
+      "price": 1250.00,
+      "currency": "SAR",
+      "status": "sale",
+      "promotion_title": "الأكثر طلباً",
+      "image": {
+        "url": "https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=600&q=85",
+        "alt": "زجاجة عطر فاخرة من الكريستال بتفاصيل ذهبية"
+      },
+      "category": {
+        "name": "العطور الخاصة"
+      }
+    },
+    {
+      "id": 103,
+      "name": "حقيبة يد جلد طبيعي هيرمس كلاسيك",
+      "subtitle": "صناعة إيطالية يدوية من جلد العجل المحبب",
+      "url": "/products/artisan-leather-tote",
+      "price": 3400.00,
+      "currency": "SAR",
+      "status": "sale",
+      "promotion_title": "مقتنيات نادرة",
+      "image": {
+        "url": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=85",
+        "alt": "حقيبة يد جلدية فاخرة باللون البني العسلي"
+      },
+      "category": {
+        "name": "المقتنيات الجلدية"
+      }
+    },
+    {
+      "id": 104,
+      "name": "طقم شاي بورسلين مطلي بذهب عيار 24",
+      "subtitle": "تصميم هندسي مستوحى من النقوش الإسلامية الأندلسية",
+      "url": "/products/imperial-tea-set",
+      "price": 980.00,
+      "currency": "SAR",
+      "status": "sale",
+      "promotion_title": null,
+      "image": {
+        "url": "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=85",
+        "alt": "طقم شاي فاخر من البورسلين بنقوش ذهبية"
+      },
+      "category": {
+        "name": "الديكور والمقتنيات"
+      }
+    }
+  ]
+}
