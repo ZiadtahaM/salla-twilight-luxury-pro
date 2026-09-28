@@ -1,0 +1,81 @@
+{#
+  Component: Luxury Hero Banner 2.0
+  Path: src/views/components/home/luxury-hero-banner.twig
+  Schema: twilight.json -> components['home.luxury-hero-banner']
+#}
+
+{% set banner = component.fields %}
+{% set align_class = banner.text_alignment == 'start' ? 'items-start text-start' : 'items-center text-center' %}
+{% set overlay_alpha = (banner.overlay_opacity|default(35)) / 100 %}
+
+<section 
+  aria-label="{{ banner.title|default('الإعلان الرئيسي') }}" 
+  class="relative w-full overflow-hidden bg-stone-900 text-white"
+>
+  {# Responsive Image with picture tag to eliminate mobile overfetching #}
+  <picture class="absolute inset-0 w-full h-full">
+    {% if banner.desktop_image %}
+      <source media="(min-width: 768px)" srcset="{{ banner.desktop_image }}">
+    {% endif %}
+    {% if banner.mobile_image %}
+      <source media="(max-width: 767px)" srcset="{{ banner.mobile_image }}">
+    {% endif %}
+    <img 
+      src="{{ banner.desktop_image|default(banner.mobile_image)|default('https://cdn.salla.sa/placeholder-banner.jpg') }}" 
+      alt="{{ banner.image_alt|default(banner.title)|default('صورة الواجهة الرئيسية') }}" 
+      class="w-full h-full object-cover object-center select-none"
+      loading="eager"
+      decoding="async"
+      width="1920"
+      height="1080"
+    >
+  </picture>
+
+  {# Contrast Protection Layer with Merchant-Controlled Opacity #}
+  <div 
+    class="absolute inset-0 bg-stone-950 transition-opacity duration-300"
+    style="opacity: {{ overlay_alpha }};"
+    aria-hidden="true"
+  ></div>
+
+  {# Gradient scrim for enhanced text legibility #}
+  <div 
+    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" 
+    aria-hidden="true"
+  ></div>
+
+  {# Content Container with Dynamic Alignment and Accessible Contrast #}
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-44 flex flex-col {{ align_class }} justify-center min-h-[500px] sm:min-h-[600px] lg:min-h-[700px]">
+    {% if banner.eyebrow %}
+      <span class="inline-block text-xs sm:text-sm font-semibold tracking-widest uppercase text-amber-300 mb-3 px-3 py-1 bg-black/40 backdrop-blur-sm border border-amber-300/30">
+        {{ banner.eyebrow }}
+      </span>
+    {% endif %}
+
+    {% if banner.title %}
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white max-w-3xl leading-tight mb-4 drop-shadow-sm" style="font-family: var(--font-display);">
+        {{ banner.title }}
+      </h1>
+    {% endif %}
+
+    {% if banner.subtitle %}
+      <p class="text-base sm:text-lg lg:text-xl text-stone-200 max-w-2xl font-light mb-8 leading-relaxed drop-shadow">
+        {{ banner.subtitle }}
+      </p>
+    {% endif %}
+
+    {% if banner.cta_label and banner.cta_url %}
+      <div class="pt-2">
+        <a 
+          href="{{ banner.cta_url }}" 
+          class="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold tracking-wider uppercase text-stone-900 bg-white hover:bg-amber-100 focus:bg-amber-100 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-900"
+        >
+          <span>{{ banner.cta_label }}</span>
+          <svg class="w-4 h-4 ms-2 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>

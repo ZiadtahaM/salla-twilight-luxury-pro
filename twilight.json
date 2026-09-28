@@ -1,0 +1,122 @@
+{
+  "name": "Luxury Pro Bespoke",
+  "version": "1.0.0",
+  "description": "Bespoke high-end luxury theme for Salla Pro stores with RTL/LTR precision and full accessibility.",
+  "author": {
+    "name": "Ziad Taha",
+    "email": "dev@ziadtaha.pro",
+    "url": "https://github.com/ZiadtahaM"
+  },
+  "support": {
+    "email": "support@ziadtaha.pro",
+    "url": "https://github.com/ZiadtahaM/salla-twilight-luxury-pro"
+  },
+  "settings": {
+    "luxury_theme_palette": {
+      "type": "color",
+      "label": "Primary Accent Color",
+      "default": "#1A1A1A"
+    },
+    "luxury_secondary_accent": {
+      "type": "color",
+      "label": "Secondary Gold Accent",
+      "default": "#D4AF37"
+    },
+    "luxury_font_family": {
+      "type": "select",
+      "label": "Typography Pairing",
+      "default": "cormorant-ibm",
+      "options": [
+        {
+          "label": "Cormorant Garamond + IBM Plex Sans Arabic",
+          "value": "cormorant-ibm"
+        },
+        {
+          "label": "Playfair Display + Readex Pro",
+          "value": "playfair-readex"
+        }
+      ]
+    }
+  },
+  "features": {
+    "sticky_header": true,
+    "quick_buy": true,
+    "ajax_cart": true,
+    "product_filters": true
+  },
+  "components": {
+    "home.luxury-hero-banner": {
+      "name": "Luxury Hero Banner 2.0",
+      "description": "High-conversion bilingual hero section with contrast protection, responsive aspect ratios, and full accessibility.",
+      "icon": "sallaicons-image",
+      "path": "src/views/components/home/luxury-hero-banner.twig",
+      "fields": {
+        "eyebrow": {
+          "type": "text",
+          "label": "Eyebrow Text (Arabic / English)",
+          "default": "تشكيلة حصرية | Private Reserve"
+        },
+        "title": {
+          "type": "text",
+          "label": "Main Heading",
+          "default": "الأناقة في أبهى صورها",
+          "required": true
+        },
+        "subtitle": {
+          "type": "textarea",
+          "label": "Description Copy",
+          "default": "قطع مختارة بعناية تعكس الفخامة المعاصرة بأدق التفاصيل الحرفية."
+        },
+        "desktop_image": {
+          "type": "image",
+          "label": "Desktop Image (Aspect Ratio 16:9 or 21:9)",
+          "required": true
+        },
+        "mobile_image": {
+          "type": "image",
+          "label": "Mobile Image (Aspect Ratio 4:5 or 1:1)",
+          "required": true
+        },
+        "image_alt": {
+          "type": "text",
+          "label": "Accessible Image Alt Text",
+          "default": "صورة التشكيلة الفاخرة الجديدة",
+          "required": true
+        },
+        "cta_label": {
+          "type": "text",
+          "label": "Call To Action Label",
+          "default": "استكشف المجموعة"
+        },
+        "cta_url": {
+          "type": "url",
+          "label": "Call To Action Link",
+          "default": "/categories/luxury-reserve"
+        },
+        "overlay_opacity": {
+          "type": "range",
+          "label": "Dark Overlay Opacity Percentage",
+          "min": 10,
+          "max": 80,
+          "step": 5,
+          "default": 35
+        },
+        "text_alignment": {
+          "type": "select",
+          "label": "Content Alignment",
+          "default": "center",
+          "options": [
+            {
+              "label": "Center",
+              "value": "center"
+            },
+            {
+              "label": "Start (Right in RTL, Left in LTR)",
+              "value": "start"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

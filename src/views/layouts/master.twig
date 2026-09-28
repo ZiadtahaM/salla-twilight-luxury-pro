@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="{{ user.language.code|default('ar') }}" dir="{{ user.language.dir|default('rtl') }}" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ store.name }} | {% block title %}{{ page.title|default('المتجر الرسمي') }}{% endblock %}</title>
+  
+  {# Salla platform injected assets and meta tags #}
+  {{ salla_header() }}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --luxury-primary: {{ theme.settings.luxury_theme_palette|default('#1A1A1A') }};
+      --luxury-accent: {{ theme.settings.luxury_secondary_accent|default('#D4AF37') }};
+      --luxury-bg: #FAF9F6;
+      --luxury-surface: #FFFFFF;
+      --luxury-border: #E5E2DC;
+      --luxury-text: #1C1B1A;
+      --luxury-muted: #6E6B66;
+      --font-body: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-display: 'Cormorant Garamond', 'IBM Plex Sans Arabic', serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--luxury-bg);
+      color: var(--luxury-text);
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .skip-to-content:focus {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 9999;
+      padding: 0.75rem 1.25rem;
+      background: var(--luxury-primary);
+      color: #FFFFFF;
+      border: 1px solid var(--luxury-accent);
+      outline: 2px solid var(--luxury-accent);
+    }
+
+    /* Piercing and styling Salla native web components cleanly */
+    salla-button {
+      --salla-primary-color: var(--luxury-primary);
+      --salla-primary-hover-color: #000000;
+      --salla-border-radius: 0px;
+    }
+
+    salla-product-card {
+      --card-bg: var(--luxury-surface);
+      --card-border-color: var(--luxury-border);
+      --card-border-radius: 0px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    }
+
+    salla-product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.08);
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen">
+  <a href="#main-content" class="sr-only skip-to-content">
+    {{ trans('common.skip_to_content')|default('الانتقال مباشرة إلى المحتوى الأساسي') }}
+  </a>
+
+  <header role="banner" class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-stone-200 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <a href="{{ store.url }}" class="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-600" aria-label="{{ store.name }}">
+          {% if store.logo %}
+            <img src="{{ store.logo }}" alt="{{ store.name }}" class="h-10 w-auto object-contain" width="140" height="40" loading="eager">
+          {% else %}
+            <span class="text-2xl font-bold tracking-tight text-stone-900" style="font-family: var(--font-display);">{{ store.name }}</span>
+          {% endif %}
+        </a>
+
+        <nav role="navigation" aria-label="Main Navigation" class="hidden md:flex items-center gap-6">
+          <ul class="flex items-center gap-6 list-none m-0 p-0 text-sm font-medium">
+            <li><a href="/" class="text-stone-700 hover:text-stone-950 transition-colors focus-visible:ring-2 focus-visible:ring-amber-600">{{ trans('common.home')|default('الرئيسية') }}</a></li>
+            <li><a href="/categories" class="text-stone-700 hover:text-stone-950 transition-colors focus-visible:ring-2 focus-visible:ring-amber-600">{{ trans('common.categories')|default('المجموعات') }}</a></li>
+            <li><a href="/offers" class="text-stone-700 hover:text-stone-950 transition-colors focus-visible:ring-2 focus-visible:ring-amber-600">{{ trans('common.offers')|default('العروض الحصرية') }}</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-4">
+        {# Native Salla Cart Summary Trigger #}
+        <salla-cart-summary class="cursor-pointer" aria-label="{{ trans('common.cart')|default('سلة المشتريات') }}"></salla-cart-summary>
+        
+        {# Customer Account Access #}
+        <a href="{{ user.is_logged_in ? '/profile' : '/login' }}" class="text-xs uppercase tracking-widest px-3 py-2 border border-stone-300 hover:border-stone-900 transition-colors" aria-label="{{ user.is_logged_in ? 'حسابي' : 'تسجيل الدخول' }}">
+          {{ user.is_logged_in ? (user.name|default('حسابي')) : (trans('common.login')|default('دخول')) }}
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" role="main" class="flex-grow">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer role="contentinfo" class="bg-stone-950 text-stone-300 py-16 border-t border-stone-800 mt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div>
+        <h3 class="text-white text-lg font-semibold mb-4" style="font-family: var(--font-display);">{{ store.name }}</h3>
+        <p class="text-stone-400 text-sm leading-relaxed max-w-sm">
+          {{ store.description|default('تجربة تسوق راقية مصممة وفق أعلى معايير الجودة والحرفية.') }}
+        </p>
+      </div>
+      <div>
+        <h4 class="text-white text-sm uppercase tracking-wider mb-4">{{ trans('common.customer_care')|default('خدمة العملاء') }}</h4>
+        <ul class="space-y-2 text-sm text-stone-400">
+          <li><a href="/orders/tracking" class="hover:text-white transition-colors">{{ trans('common.track_order')|default('تتبع طلبك') }}</a></li>
+          <li><a href="/pages/shipping" class="hover:text-white transition-colors">{{ trans('common.shipping_policy')|default('الشحن والتوصيل') }}</a></li>
+          <li><a href="/pages/returns" class="hover:text-white transition-colors">{{ trans('common.returns')|default('الاستبدال والاسترجاع') }}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white text-sm uppercase tracking-wider mb-4">{{ trans('common.payment_security')|default('الدفع الموثوق') }}</h4>
+        <p class="text-xs text-stone-400 leading-relaxed mb-4">
+          {{ trans('common.secure_checkout_notice')|default('معاملاتك مشفرة ومحمية ببروتوكولات الأمان المعتمدة في منصة سلة.') }}
+        </p>
+        <div class="flex items-center gap-3">
+          <span class="text-xs text-stone-400">Mada / Visa / Apple Pay</span>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-8 border-t border-stone-900 text-xs text-stone-500 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p>&copy; {{ "now"|date("Y") }} {{ store.name }}. جميع الحقوق محفوظة.</p>
+      <p>Powered by Salla Pro & Twilight Engine</p>
+    </div>
+  </footer>
+
+  {# Salla platform injected footer scripts and modal layers #}
+  {{ salla_footer() }}
+</body>
+</html>

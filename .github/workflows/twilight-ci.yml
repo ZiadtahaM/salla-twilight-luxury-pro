@@ -1,0 +1,94 @@
+name: Salla Twilight CI Quality Gate
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-theme:
+    name: Twilight Schema & Invariant Gate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate twilight.json Syntax & Schema Invariants
+        run: |
+          node -e '
+            const fs = require("fs");
+            const raw = fs.readFileSync("twilight.json", "utf8");
+            let data;
+            try {
+              data = JSON.parse(raw);
+            } catch (err) {
+              console.error("Syntax Error in twilight.json:", err.message);
+              process.exit(1);
+            }
+
+            const required = ["name", "version", "author", "components"];
+            for (const key of required) {
+              if (!data[key]) {
+                console.error(`Missing mandatory root key: ${key}`);
+                process.exit(1);
+              }
+            }
+
+            // Verify each component points to an existing Twig file
+            for (const [id, comp] of Object.entries(data.components)) {
+              if (!comp.path || !fs.existsSync(comp.path)) {
+                console.error(`Component [${id}] points to non-existent path: ${comp.path}`);
+                process.exit(1);
+              }
+              if (!comp.fields) {
+                console.error(`Component [${id}] lacks fields definition.`);
+                process.exit(1);
+              }
+            }
+
+            console.log("twilight.json schema invariants PASSED.");
+          '
+
+      - name: Check Salla Core Hooks in Master Layout
+        run: |
+          node -e '
+            const fs = require("fs");
+            const master = fs.readFileSync("src/views/layouts/master.twig", "utf8");
+            
+            if (!master.includes("salla_header()")) {
+              console.error("FATAL: master.twig is missing mandatory {{ salla_header() }} hook!");
+              process.exit(1);
+            }
+            if (!master.includes("salla_footer()")) {
+              console.error("FATAL: master.twig is missing mandatory {{ salla_footer() }} hook!");
+              process.exit(1);
+            }
+            if (!master.includes("dir=\"{{ user.language.dir")) {
+              console.error("WARNING: master.twig should dynamically bind language direction (RTL/LTR).");
+            }
+            console.log("Salla Core Hooks verification PASSED.");
+          '
+
+      - name: Audit Accessibility & Contrast Attributes
+        run: |
+          node -e '
+            const fs = require("fs");
+            const banner = fs.readFileSync("src/views/components/home/luxury-hero-banner.twig", "utf8");
+            
+            if (!banner.includes("alt=")) {
+              console.error("FATAL: Hero banner lacks accessible alt attribute.");
+              process.exit(1);
+            }
+            if (!banner.includes("aria-label=")) {
+              console.error("FATAL: Hero banner section lacks semantic aria-label.");
+              process.exit(1);
+            }
+            console.log("Accessibility static audit PASSED.");
+          '
