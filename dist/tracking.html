@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تتبع مسار الشحنة | دار النخبة</title>
+  <style>
+    
+  :root {
+    --lux-bg: #FAF9F6;
+    --lux-surface: #FFFFFF;
+    --lux-black: #111111;
+    --lux-dark: #1C1B1A;
+    --lux-gold: #C5A059;
+    --lux-gold-light: #F4EAD4;
+    --lux-gold-hover: #AF8B43;
+    --lux-border: #E8E5DF;
+    --lux-border-light: #F0ECE4;
+    --lux-text: #1C1B1A;
+    --lux-muted: #736E66;
+    --font-serif: "Cormorant Garamond", Georgia, "Amiri", serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "IBM Plex Sans Arabic", sans-serif;
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--lux-bg);
+    color: var(--lux-text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 72px; /* space for mobile bottom bar */
+  }
+  @media (min-width: 769px) {
+    body { padding-bottom: 0; }
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* Skip Link */
+  .skip-link {
+    position: absolute; top: -100px; left: 1rem; z-index: 10000;
+    background: var(--lux-black); color: #fff; padding: 0.5rem 1rem;
+    font-size: 0.8rem; font-weight: 600;
+  }
+  .skip-link:focus { top: 1rem; }
+
+  /* Header */
+  header.site-header {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(250, 249, 246, 0.96);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--lux-border);
+    height: 72px; display: flex; align-items: center;
+  }
+  .header-wrap {
+    max-width: 1320px; width: 100%; margin: 0 auto; padding: 0 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .brand-group { display: flex; align-items: center; gap: 2rem; }
+  .brand-logo-wrap { display: flex; align-items: center; gap: 0.75rem; }
+  .brand-emblem {
+    width: 32px; height: 32px; border: 1.5px solid var(--lux-gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-serif); font-size: 1.1rem; font-weight: 700; color: var(--lux-gold);
+  }
+  .brand-logo {
+    font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700;
+    letter-spacing: -0.02em; color: var(--lux-black); white-space: nowrap;
+  }
+  
+  nav.desktop-nav { display: flex; align-items: center; gap: 1.75rem; }
+  nav.desktop-nav a {
+    font-size: 0.88rem; font-weight: 500; color: var(--lux-muted);
+    transition: color 0.2s; position: relative; padding: 0.5rem 0;
+  }
+  nav.desktop-nav a:hover, nav.desktop-nav a.active { color: var(--lux-black); font-weight: 600; }
+  nav.desktop-nav a.active::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: var(--lux-gold);
+  }
+
+  .header-actions { display: flex; align-items: center; gap: 0.85rem; }
+  .btn-lang {
+    font-size: 0.75rem; text-transform: uppercase; font-weight: 600;
+    padding: 0.35rem 0.65rem; border: 1px solid var(--lux-border); border-radius: 2px;
+    background: transparent; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-lang:hover { border-color: var(--lux-black); }
+
+  .btn-cart-trigger {
+    background: none; border: none; cursor: pointer; color: var(--lux-black);
+    display: flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600;
+    padding: 0.4rem;
+  }
+  .badge-count {
+    background: var(--lux-gold); color: #000; font-size: 0.65rem; font-weight: 700;
+    padding: 0.15rem 0.45rem; border-radius: 99px;
+  }
+  .btn-account-pill {
+    background: var(--lux-black); color: #fff; border: 1px solid var(--lux-black);
+    padding: 0.45rem 1rem; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;
+    border-radius: 2px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.4rem;
+  }
+  .btn-account-pill:hover { background: #000; }
+
+  .mobile-menu-btn {
+    display: none; background: none; border: none; cursor: pointer; color: var(--lux-black); padding: 0.3rem;
+  }
+
+  /* Slide-out Mobile Navigation Drawer */
+  .mobile-nav-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+    z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+  }
+  .mobile-nav-overlay.active { opacity: 1; pointer-events: auto; }
+  .mobile-nav-drawer {
+    position: fixed; top: 0; bottom: 0; width: 85%; max-width: 320px;
+    background: var(--lux-surface); z-index: 9999; display: flex; flex-direction: column;
+    box-shadow: 0 0 40px rgba(0,0,0,0.3); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  [dir="rtl"] .mobile-nav-drawer { right: 0; left: auto; transform: translateX(100%); }
+  [dir="rtl"] .mobile-nav-drawer.open { transform: translateX(0); }
+  [dir="ltr"] .mobile-nav-drawer { left: 0; right: auto; transform: translateX(-100%); }
+  [dir="ltr"] .mobile-nav-drawer.open { transform: translateX(0); }
+
+  .mobile-nav-header {
+    padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--lux-border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .mobile-nav-links { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; flex-grow: 1; }
+  .mobile-nav-links a {
+    font-size: 1rem; font-weight: 500; color: var(--lux-text); display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: 0.75rem; border-bottom: 1px solid var(--lux-border-light);
+  }
+  .mobile-nav-links a.active { color: var(--lux-gold); font-weight: 700; }
+  .mobile-nav-footer { padding: 1.5rem; border-top: 1px solid var(--lux-border); background: var(--lux-bg); }
+
+  /* Mobile Bottom Navigation Bar */
+  .mobile-bottom-bar {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 900;
+    height: 64px; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(12px);
+    border-top: 1px solid var(--lux-border);
+    grid-template-columns: repeat(5, 1fr); align-items: center; text-align: center;
+  }
+  .mobile-tab-item {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--lux-muted); font-size: 0.65rem; font-weight: 600; height: 100%; position: relative;
+  }
+  .mobile-tab-item.active { color: var(--lux-gold); }
+  .mobile-tab-item svg { width: 20px; height: 20px; margin-bottom: 2px; }
+
+  @media (max-width: 768px) {
+    header.site-header { height: 62px; }
+    nav.desktop-nav { display: none; }
+    .btn-account-pill { display: none; }
+    .mobile-menu-btn { display: block; }
+    .mobile-bottom-bar { display: grid; }
+    .brand-logo { font-size: 1.25rem; }
+  }
+
+  /* Quick-Cart Sliding Drawer */
+  .drawer-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+    z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+  }
+  .drawer-overlay.active { opacity: 1; pointer-events: auto; }
+  .cart-drawer {
+    position: fixed; top: 0; bottom: 0; width: 100%; max-width: 440px;
+    background: var(--lux-surface); z-index: 9999; display: flex; flex-direction: column;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.25); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  [dir="rtl"] .cart-drawer { left: 0; right: auto; transform: translateX(-100%); }
+  [dir="rtl"] .cart-drawer.open { transform: translateX(0); }
+  [dir="ltr"] .cart-drawer { right: 0; left: auto; transform: translateX(100%); }
+  [dir="ltr"] .cart-drawer.open { transform: translateX(0); }
+
+  .drawer-header {
+    padding: 1.5rem; border-bottom: 1px solid var(--lux-border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .drawer-body { padding: 1.5rem; flex-grow: 1; overflow-y: auto; }
+  .drawer-footer { padding: 1.5rem; border-top: 1px solid var(--lux-border); background: var(--lux-bg); }
+
+  .free-ship-bar {
+    background: var(--lux-gold-light); padding: 0.75rem 1rem; border-radius: 4px;
+    margin-bottom: 1rem; font-size: 0.78rem; color: #684E1A; font-weight: 600;
+  }
+  .ship-track { height: 4px; background: #D9C8A5; border-radius: 2px; margin-top: 0.5rem; overflow: hidden; }
+  .ship-progress { height: 100%; width: 100%; background: var(--lux-gold); }
+
+  .cart-item {
+    display: flex; gap: 1rem; margin-bottom: 1.25rem; padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--lux-border); align-items: center;
+  }
+  .cart-item-img {
+    width: 72px; height: 96px; object-fit: cover; background: #eee; flex-shrink: 0; border: 1px solid var(--lux-border);
+  }
+  .qty-ctrl {
+    display: inline-flex; border: 1px solid var(--lux-border); align-items: center; margin-top: 0.5rem;
+  }
+  .qty-ctrl button {
+    background: none; border: none; width: 26px; height: 26px; cursor: pointer; font-size: 0.9rem; font-weight: bold;
+  }
+  .qty-ctrl span { width: 30px; text-align: center; font-size: 0.8rem; font-weight: 600; }
+
+  /* Footer */
+  footer {
+    background: #0E0D0C; color: #9E9A91; padding: 5rem 1.5rem 2rem;
+    margin-top: auto; border-top: 1px solid #242220;
+  }
+  .footer-inner {
+    max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 4rem;
+  }
+  .footer-inner h4 {
+    color: #fff; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 1.25rem; font-weight: 600;
+  }
+  .footer-inner ul { list-style: none; }
+  .footer-inner ul li { margin-bottom: 0.75rem; font-size: 0.85rem; }
+  .footer-inner ul li a:hover { color: #fff; }
+  .footer-bar {
+    max-width: 1320px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid #1C1A18;
+    display: flex; justify-content: space-between; font-size: 0.78rem; color: #66635C;
+  }
+  @media (max-width: 900px) {
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bar { flex-direction: column; gap: 1rem; }
+  }
+
+    .track-wrap { max-width: 800px; margin: 4rem auto; padding: 0 1.5rem; }
+    .track-card {
+      background: var(--lux-surface); border: 1px solid var(--lux-border); padding: 2.5rem; border-radius: 2px;
+    }
+    .search-row { display: flex; gap: 0.75rem; margin-bottom: 2.5rem; }
+    .search-input { flex-grow: 1; padding: 0.9rem; border: 1px solid var(--lux-border); font-size: 0.9rem; }
+    .btn-search { padding: 0.9rem 2rem; background: var(--lux-black); color: #fff; border: none; font-weight: 600; cursor: pointer; }
+    
+    .timeline { position: relative; margin: 3rem 0; padding-inline-start: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; top: 0; bottom: 0; right: 7px;
+      width: 2px; background: var(--lux-border);
+    }
+    .step { position: relative; margin-bottom: 2rem; }
+    .step::before {
+      content: ''; position: absolute; right: -29px; top: 4px;
+      width: 14px; height: 14px; border-radius: 50%; background: #ccc; border: 3px solid #fff;
+    }
+    .step.done::before { background: var(--lux-gold); }
+    .step.active::before { background: #000; box-shadow: 0 0 0 4px var(--lux-gold-light); }
+  </style>
+</head>
+<body>
+  
+  <a href="#main" class="skip-link">الانتقال إلى المحتوى</a>
+  <header role="banner" class="site-header">
+    <div class="header-wrap">
+      <div class="brand-group">
+        <button class="mobile-menu-btn" onclick="openMobileNav()" aria-label="Toggle Navigation">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <a href="index.html" class="brand-logo-wrap">
+          <div class="brand-emblem">EM</div>
+          <span class="brand-logo">دار النخبة</span>
+        </a>
+        <nav class="desktop-nav">
+          <a href="index.html" class="">الرئيسية</a>
+          <a href="categories.html" class="">المجموعات الخاصة</a>
+          <a href="product.html" class="">القطع المميزة</a>
+          <a href="tracking.html" class="active">تتبع الطلبات</a>
+        </nav>
+      </div>
+
+      <div class="header-actions">
+        <a href="tracking-en.html" class="btn-lang">English</a>
+        <button class="btn-cart-trigger" onclick="openCart()" aria-label="السلة">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          <span class="badge-count" id="headerCartCount">2</span>
+        </button>
+        <a href="account.html" class="btn-account-pill">
+          <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+          <span>حسابي (VIP)</span>
+        </a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main class="track-wrap" id="main">
+    <div class="track-card">
+      <h1 style="font-family:var(--font-serif); font-size:2rem; margin-bottom:0.5rem;">تتبع شحنتك الفاخرة</h1>
+      <p style="font-size:0.85rem; color:var(--lux-muted); margin-bottom:2rem;">
+        أدخل رقم الشحنة أو رقم الطلب المسجل في منصة سلة
+      </p>
+
+      <div class="search-row">
+        <input type="text" class="search-input" value="SL-884920" placeholder="e.g. SL-884920">
+        <button class="btn-search">استعلام فوري</button>
+      </div>
+
+      <div style="background:var(--lux-bg); padding:1.25rem; border:1px solid var(--lux-border); display:flex; justify-content:space-between; flex-wrap:wrap; gap:1.25rem; font-size:0.85rem; margin-bottom:1.5rem;">
+        <div><strong style="color:var(--lux-muted);">رقم الشحنة:</strong> <span style="font-weight:700;">SMSA-99201481</span></div>
+        <div><strong style="color:var(--lux-muted);">الناقل المعتمد:</strong> <span style="font-weight:700;">سمسا إكسبريس الفاخر</span></div>
+        <div><strong style="color:var(--lux-muted);">الموعد المتوقع:</strong> <span style="font-weight:700; color:var(--lux-gold);">خلال 24 ساعة</span></div>
+      </div>
+
+      <div class="timeline">
+        <div class="step done">
+          <h4>تم اعتماد وتأكيد الطلب بنجاح</h4>
+          <span style="font-size:0.75rem; color:var(--lux-muted);">28 سبتمبر 2026 - 10:30 صباحاً</span>
+        </div>
+        <div class="step done">
+          <h4>التجهيز والتغليف الفاخر الحريري</h4>
+          <span style="font-size:0.75rem; color:var(--lux-muted);">28 سبتمبر 2026 - 02:15 مساءً</span>
+        </div>
+        <div class="step active">
+          <h4>في الطريق مع مندوب التوصيل المباشر</h4>
+          <span style="font-size:0.75rem; color:var(--lux-gold); font-weight:600;">جاري التوصيل إلى الرياض، حي حطين</span>
+        </div>
+        <div class="step">
+          <h4>تم التسليم للعميل</h4>
+          <span style="font-size:0.75rem; color:var(--lux-muted);">متوقع خلال ساعات اليوم</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="brand-logo-wrap" style="margin-bottom:1rem;">
+          <div class="brand-emblem">EM</div>
+          <span class="brand-logo" style="color:#fff; font-size:1.3rem;">دار النخبة الفاخرة</span>
+        </div>
+        <p style="font-size:0.85rem; line-height:1.8; max-width:360px; color:#A8A49C;">
+          بوتيك سعودي رفيع المستوى مصمم ومبني وفق أرقى معايير الفخامة العالمية على منصة سلة برو بواسطة شركاء سalla المعتمدين.
+        </p>
+        <div style="margin-top:1.25rem; font-size:0.75rem; color:#888;">
+          السجل التجاري: 1010892014 | الرقم الضريبي: 301294829100003
+        </div>
+      </div>
+      <div>
+        <h4>التسوق والاستكشاف</h4>
+        <ul>
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="categories.html">المجموعات الخاصة</a></li>
+          <li><a href="product.html">القطع الأكثر طلباً</a></li>
+          <li><a href="cart.html">سلة المشتريات</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>خدمة العملاء والطلبات</h4>
+        <ul>
+          <li><a href="tracking.html">تتبع الشحنة الفاخرة</a></li>
+          <li><a href="account.html">حسابي والعضوية</a></li>
+          <li><a href="javascript:void(0)">الشحن والتوصيل المصفح</a></li>
+          <li><a href="javascript:void(0)">سياسة الاستبدال والضمان</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>الدفع والأمان والاعتماد</h4>
+        <p style="font-size:0.8rem; margin-bottom:1rem; color:#A8A49C;">
+          معاملات مشفرة 100% معتمدة من البنك المركزي السعودي (ساما) عبر بوابة سلة.
+        </p>
+        <div style="font-size:0.8rem; color:#D4AF37; font-weight:600; line-height:1.8;">
+          Mada &bull; Visa &bull; Mastercard &bull; Apple Pay &bull; Tamara &bull; Tabby
+        </div>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <span>&copy; 2026 دار النخبة الفاخرة. جميع الحقوق محفوظة.</span>
+      <span>Certified Salla Pro Partner Theme &bull; Twilight Engine</span>
+    </div>
+  </footer>
+  
+  
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeCart()"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Quick Cart">
+    <div class="drawer-header">
+      <h3 style="font-family: var(--font-serif); font-size: 1.25rem;">سلة المقتنيات (2)</h3>
+      <button onclick="closeCart()" style="background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="free-ship-bar">
+        <span>مؤهل للشحن الفاخر المجاني المؤمن</span>
+        <div class="ship-track"><div class="ship-progress"></div></div>
+      </div>
+      <div class="cart-item">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIENhc2htZXJlIEFiYXlhIFNpbGhvdWV0dGUgLS0+CiAgICAgIDxwYXRoIGQ9Ik0xNTAgMTEwIFEyMDAgODAgMjUwIDExMCBMMjkwIDQyMCBRMjAwIDQ0MCAxMTAgNDIwIFoiIGZpbGw9IiMxNTE0MTMiLz4KICAgICAgPHBhdGggZD0iTTIwMCAxMTAgTDIwMCA0MjUiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgICAgPHBhdGggZD0iTTE4NSAxMzAgUTIwMCAxNDUgMjE1IDEzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjREZDNDg4IiBzdHJva2Utd2lkdGg9IjIuNSIvPgogICAgICA8cGF0aCBkPSJNMTc1IDE2MCBRMjAwIDE4MCAyMjUgMTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiNERkM0ODgiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMTAiIHI9IjMiIGZpbGw9IiNDNUEwNTkiLz4KICAgICAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMjQwIiByPSIzIiBmaWxsPSIjQzVBMDU5Ii8+CiAgICAgIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjI3MCIgcj0iMyIgZmlsbD0iI0M1QTA1OSIvPgogICAgCiAgPC9zdmc+" class="cart-item-img" alt="عباية مخمل كشميري مطرزة يدويًا">
+        <div style="flex-grow:1;">
+          <h4 style="font-size:0.9rem;">عباية مخمل كشميري مطرزة يدويًا</h4>
+          <span style="font-size:0.75rem; color:var(--lux-muted);">المقاس: 54 M | إصدار حصري</span>
+          <div style="font-size:0.9rem; font-weight:700; margin-top:0.25rem;">1,850.00 SAR</div>
+          <div class="qty-ctrl">
+            <button onclick="updateDrawerQty(-1)">-</button>
+            <span id="drawerQty1">1</span>
+            <button onclick="updateDrawerQty(1)">+</button>
+          </div>
+        </div>
+        <button style="background:none; border:none; color:#c00; cursor:pointer;" onclick="this.closest('.cart-item').remove()">🗑️</button>
+      </div>
+      <div class="cart-item">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIENyeXN0YWwgT3VkIEZsYWNvbiAtLT4KICAgICAgPHJlY3QgeD0iMTgwIiB5PSI5MCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjM1IiByeD0iMyIgZmlsbD0iI0M1QTA1OSIvPgogICAgICA8cGF0aCBkPSJNMTkwIDcwIEwyMTAgNzAgTDIxNSA5MCBMMTg1IDkwIFoiIGZpbGw9IiNERkM0ODgiLz4KICAgICAgPHJlY3QgeD0iMTM1IiB5PSIxMjUiIHdpZHRoPSIxMzAiIGhlaWdodD0iMTkwIiByeD0iMTQiIGZpbGw9IiMyQTFCMEUiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgICAgIDxyZWN0IHg9IjE0NSIgeT0iMTM1IiB3aWR0aD0iMTEwIiBoZWlnaHQ9IjE3MCIgcng9IjgiIGZpbGw9IiNCODczMjIiIGZpbGwtb3BhY2l0eT0iMC44Ii8+CiAgICAgIDwhLS0gTGFiZWwgLS0+CiAgICAgIDxyZWN0IHg9IjE2MCIgeT0iMTg1IiB3aWR0aD0iODAiIGhlaWdodD0iNzAiIGZpbGw9IiNGQUY5RjYiLz4KICAgICAgPHJlY3QgeD0iMTY1IiB5PSIxOTAiIHdpZHRoPSI3MCIgaGVpZ2h0PSI2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzVBMDU5IiBzdHJva2Utd2lkdGg9IjEiLz4KICAgICAgPHRleHQgeD0iMjAwIiB5PSIyMTUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMxMTEiPk9VRCBST1lBTDwvdGV4dD4KICAgICAgPHRleHQgeD0iMjAwIiB5PSIyMzUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjciIGxldHRlci1zcGFjaW5nPSIxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjODg4Ij5BR0VEIEVYVFJBQ1Q8L3RleHQ+CiAgICAKICA8L3N2Zz4=" class="cart-item-img" alt="عطر العود الملكي المعتّق 100 مل">
+        <div style="flex-grow:1;">
+          <h4 style="font-size:0.9rem;">عطر العود الملكي المعتّق 100 مل</h4>
+          <span style="font-size:0.75rem; color:var(--lux-muted);">حجم: 100 مل | أصلي 100%</span>
+          <div style="font-size:0.9rem; font-weight:700; margin-top:0.25rem;">1,250.00 SAR</div>
+          <div class="qty-ctrl">
+            <button onclick="updateDrawerQty(-1)">-</button>
+            <span id="drawerQty2">1</span>
+            <button onclick="updateDrawerQty(1)">+</button>
+          </div>
+        </div>
+        <button style="background:none; border:none; color:#c00; cursor:pointer;" onclick="this.closest('.cart-item').remove()">🗑️</button>
+      </div>
+    </div>
+    <div class="drawer-footer">
+      <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--lux-muted); margin-bottom:0.4rem;">
+        <span>المجموع الفرعي</span>
+        <span id="drawerSubtotalTxt">3,100.00 SAR</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:1.1rem; font-weight:700; color:var(--lux-black); margin-bottom:1.25rem;">
+        <span>الإجمالي الشامل (VAT)</span>
+        <span style="color:var(--lux-gold);" id="drawerTotalTxt">3,100.00 SAR</span>
+      </div>
+      <a href="cart.html" style="display:block; text-align:center; padding:0.9rem; background:#000; color:#fff; font-weight:600; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">
+        معاينة السلة الكاملة
+      </a>
+      <a href="https://salla.sa" target="_blank" style="display:block; text-align:center; padding:0.9rem; background:var(--lux-gold); color:#000; font-weight:700; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em;">
+        إتمام الطلب عبر سلة برو
+      </a>
+    </div>
+  </aside>
+
+  <script>
+    function openCart() {
+      document.getElementById('drawerOverlay').classList.add('active');
+      document.getElementById('cartDrawer').classList.add('open');
+    }
+    function closeCart() {
+      document.getElementById('drawerOverlay').classList.remove('active');
+      document.getElementById('cartDrawer').classList.remove('open');
+    }
+    function openMobileNav() {
+      document.getElementById('mobileNavOverlay').classList.add('active');
+      document.getElementById('mobileNavDrawer').classList.add('open');
+    }
+    function closeMobileNav() {
+      document.getElementById('mobileNavOverlay').classList.remove('active');
+      document.getElementById('mobileNavDrawer').classList.remove('open');
+    }
+    function updateDrawerQty(delta) {
+      const q = document.getElementById('drawerQty1');
+      if (!q) return;
+      let val = parseInt(q.innerText) + delta;
+      if (val < 1) val = 1;
+      q.innerText = val;
+      const total = (1850 * val + 1250).toLocaleString('en-US', { minimumFractionDigits: 2 });
+      document.getElementById('drawerSubtotalTxt').innerText = total + ' SAR';
+      document.getElementById('drawerTotalTxt').innerText = total + ' SAR';
+    }
+  </script>
+  
+  
+  <!-- Mobile Slide Navigation Drawer -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileNav()"></div>
+  <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <span class="brand-logo" style="font-size:1.2rem;">دار النخبة</span>
+      <button onclick="closeMobileNav()" style="background:none; border:none; font-size:1.6rem; cursor:pointer;">&times;</button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="">
+        <span>الرئيسية</span>
+        <span>&larr;</span>
+      </a>
+      <a href="categories.html" class="">
+        <span>المجموعات</span>
+        <span>&larr;</span>
+      </a>
+      <a href="product.html" class="">
+        <span>المميزة</span>
+        <span>&larr;</span>
+      </a>
+      <a href="cart.html" class="">
+        <span>السلة</span>
+        <span>&larr;</span>
+      </a>
+      <a href="tracking.html" class="active">
+        <span>التتبع</span>
+        <span>&larr;</span>
+      </a>
+      <a href="account.html" class="">
+        <span>حسابي</span>
+        <span>&larr;</span>
+      </a>
+    </div>
+    <div class="mobile-nav-footer">
+      <a href="tracking-en.html" class="btn-lang" style="display:block; text-align:center; padding:0.6rem;">
+        Switch to English
+      </a>
+    </div>
+  </aside>
+
+  <!-- Mobile Bottom Tab Bar -->
+  <nav class="mobile-bottom-bar" aria-label="Mobile Tab Bar">
+    <a href="index.html" class="mobile-tab-item ">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      <span>الرئيسية</span>
+    </a>
+    <a href="categories.html" class="mobile-tab-item ">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+      <span>المجموعات</span>
+    </a>
+    <a href="javascript:void(0)" onclick="openCart()" class="mobile-tab-item ">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+      <span>السلة</span>
+    </a>
+    <a href="tracking.html" class="mobile-tab-item active">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      <span>التتبع</span>
+    </a>
+    <a href="account.html" class="mobile-tab-item ">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+      <span>حسابي</span>
+    </a>
+  </nav>
+  
+</body>
+</html>

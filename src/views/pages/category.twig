@@ -1,0 +1,71 @@
+{#
+  Template: category.twig
+  Scope: Salla Twilight Engine Category & Collections Catalog
+#}
+{% extends "layouts.master" %}
+
+{% block title %}
+  {{ category.name|default('المجموعات الخاصة') }}
+{% endblock %}
+
+{% block content %}
+<section class="catalog-hero py-16 px-4 bg-[#141312] text-white text-center border-b border-[#262320]">
+  <div class="max-w-4xl mx-auto">
+    <p class="text-xs uppercase tracking-widest text-[#C5A059] font-semibold mb-2">
+      {{ trans('common.private_reserve')|default('المجموعات الحصرية الخاصة') }}
+    </p>
+    <h1 class="text-3xl md:text-5xl font-serif font-bold text-white mb-4">
+      {{ category.name|default('تشكيلة النخبة الحصرية') }}
+    </h1>
+    <p class="text-sm md:text-base text-stone-300 max-w-2xl mx-auto leading-relaxed">
+      {{ category.description|default('مقتنيات نادرة صُممت بحرفية متناهية لتلبي ذوق النخبة الباحثين عن الأصالة والتفرد.') }}
+    </p>
+  </div>
+</section>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    {# Salla Native Filter Sidebar #}
+    <aside class="hidden lg:block lg:col-span-1">
+      <div class="bg-white p-6 border border-stone-200 sticky top-24">
+        <h3 class="font-serif text-lg font-bold text-stone-900 mb-4 pb-3 border-b border-stone-200">
+          {{ trans('common.filters')|default('تصفية المقتنيات') }}
+        </h3>
+        
+        <salla-filters></salla-filters>
+      </div>
+    </aside>
+
+    {# Products Grid Area #}
+    <main class="col-span-1 lg:col-span-3">
+      <div class="flex items-center justify-between pb-6 mb-8 border-b border-stone-200">
+        <span class="text-sm text-stone-500 font-medium">
+          {{ trans('common.total_products')|default('إجمالي القطع المتوفرة:') }} {{ products|length|default(8) }}
+        </span>
+        
+        {# Salla Sort Dropdown #}
+        <salla-sort-options></salla-sort-options>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for product in products %}
+          <salla-product-card 
+            product-id="{{ product.id }}" 
+            shadow-on-hover 
+            class="transition duration-300 hover:-translate-y-1">
+          </salla-product-card>
+        {% else %}
+          <div class="col-span-full py-16 text-center text-stone-500">
+            {{ trans('common.no_products')|default('لا توجد قطع مطابقة لمعايير البحث الحالية.') }}
+          </div>
+        {% endfor %}
+      </div>
+
+      {# Salla Infinite Scroll / Pagination #}
+      <div class="mt-12 flex justify-center">
+        <salla-infinite-scroll></salla-infinite-scroll>
+      </div>
+    </main>
+  </div>
+</div>
+{% endblock %}

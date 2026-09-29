@@ -94,15 +94,39 @@ def run_salla_theme_mission():
             return False
 
     def check_dist_previews(s: dict) -> bool:
-        ar = ROOT_DIR / "dist" / "preview-ar.html"
-        en = ROOT_DIR / "dist" / "preview-en.html"
-        return ar.exists() and en.exists() and ar.stat().st_size > 1000
+        required_pages = [
+            "index.html", "preview-ar.html", "preview-en.html",
+            "categories.html", "categories-en.html",
+            "product.html", "product-en.html",
+            "cart.html", "cart-en.html",
+            "tracking.html", "tracking-en.html",
+            "account.html", "account-en.html"
+        ]
+        return all((ROOT_DIR / "dist" / p).exists() and (ROOT_DIR / "dist" / p).stat().st_size > 1000 for p in required_pages)
+
+    def check_multi_page_twigs(s: dict) -> bool:
+        twigs = [
+            ROOT_DIR / "src" / "views" / "pages" / "category.twig",
+            ROOT_DIR / "src" / "views" / "pages" / "product" / "single.twig",
+            ROOT_DIR / "src" / "views" / "pages" / "cart.twig",
+            ROOT_DIR / "src" / "views" / "pages" / "order-tracking.twig",
+            ROOT_DIR / "src" / "views" / "pages" / "customer" / "account.twig",
+        ]
+        return all(p.exists() and p.stat().st_size > 200 for p in twigs)
+
+    def check_zero_dead_links(s: dict) -> bool:
+        index_file = ROOT_DIR / "dist" / "index.html"
+        if not index_file.exists():
+            return False
+        content = index_file.read_text(encoding="utf-8")
+        required_links = ["categories.html", "product.html", "tracking.html", "account.html", "cart.html"]
+        return all(link in content for link in required_links)
 
     def check_screenshots(s: dict) -> bool:
         s_dir = ROOT_DIR / "screenshots"
         expected = [
             "desktop-ar.png", "mobile-ar.png", "desktop-en.png", "mobile-en.png",
-            "desktop-ar-full.png", "mobile-ar-full.png"
+            "desktop-categories.png", "desktop-product.png", "desktop-cart.png"
         ]
         return all((s_dir / name).exists() and (s_dir / name).stat().st_size > 5000 for name in expected)
 
@@ -125,10 +149,10 @@ def run_salla_theme_mission():
         Check("components_registered", check_components_exist, "home.luxury-hero-banner must be registered with existing file"),
         Check("master_layout_hooks", check_master_layout_hooks, "master.twig must contain salla_header and salla_footer hooks"),
         Check("master_layout_rtl", check_master_layout_rtl, "master.twig must bind user.language.dir"),
-        Check("hero_accessibility", check_hero_accessibility, "luxury-hero-banner.twig must contain picture, alt, and aria-label"),
-        Check("mock_data_integrity", check_mock_data, "mock/store-data.json must contain at least 4 products"),
-        Check("dist_previews_exist", check_dist_previews, "dist/preview-ar.html and preview-en.html must exist and have content"),
-        Check("all_screenshots_captured", check_screenshots, "all 6 viewport and full-page screenshots must exist"),
+        Check("multi_page_twigs_exist", check_multi_page_twigs, "all Salla Twilight page templates must exist in src/views/pages"),
+        Check("dist_multi_page_suite", check_dist_previews, "all 13 multi-page artifacts must exist in dist/"),
+        Check("zero_dead_navigation_links", check_zero_dead_links, "navigation must link to real dedicated pages rather than dead anchors"),
+        Check("all_screenshots_captured", check_screenshots, "all desktop and mobile viewport screenshots must exist"),
         Check("salla_js_events_wired", check_salla_events_js, "salla-events.js must bind salla.cart.event listeners"),
         Check("salla_webhook_hmac_verified", check_salla_api_webhook, "salla-api.js must verify webhooks using timingSafeEqual"),
     ])

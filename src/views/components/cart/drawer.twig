@@ -1,0 +1,67 @@
+{#
+  Component: cart/drawer.twig
+  Scope: Sliding Quick Cart Drawer for Twilight Salla Theme
+#}
+<div class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 transition-opacity duration-300 opacity-0 pointer-events-none" id="cartDrawerOverlay" onclick="salla.cart.event.closeDrawer()"></div>
+
+<aside 
+  id="cartDrawerAside" 
+  class="fixed top-0 bottom-0 z-50 w-full max-w-md bg-white shadow-2xl flex flex-col transition-transform duration-300 transform ltr:right-0 ltr:translate-x-full rtl:left-0 rtl:-translate-x-full" 
+  aria-label="{{ trans('common.cart')|default('سلة المقتنيات') }}">
+  
+  {# Drawer Header #}
+  <div class="p-6 border-b border-stone-200 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <h3 class="font-serif text-lg font-bold text-stone-900">
+        {{ trans('common.cart')|default('سلة المقتنيات') }}
+      </h3>
+      <span class="text-xs bg-[#C5A059] text-black font-bold px-2 py-0.5 rounded-full" id="drawerCartCount">
+        2
+      </span>
+    </div>
+    <button 
+      type="button" 
+      onclick="salla.cart.event.closeDrawer()" 
+      class="p-2 text-stone-400 hover:text-stone-900 text-xl font-bold leading-none" 
+      aria-label="{{ trans('common.close')|default('إغلاق') }}">
+      &times;
+    </button>
+  </div>
+
+  {# Free Shipping Progress #}
+  <div class="bg-[#F4EAD4] p-4 text-xs text-[#5C4314] font-medium border-b border-[#E5D5B5]">
+    <span>{{ trans('common.free_shipping_notice')|default('مؤهل للشحن الفاخر المجاني والمؤمن بالكامل') }}</span>
+    <div class="w-full bg-[#D9C8A5] h-1.5 rounded-full mt-2 overflow-hidden">
+      <div class="bg-[#C5A059] h-full w-[85%] rounded-full"></div>
+    </div>
+  </div>
+
+  {# Drawer Body with Items #}
+  <div class="flex-grow overflow-y-auto p-6 space-y-4" id="drawerCartItems">
+    {# Items populated via salla.cart.event or static fallback #}
+  </div>
+
+  {# Drawer Footer #}
+  <div class="p-6 border-t border-stone-200 bg-stone-50 space-y-3">
+    <div class="flex justify-between text-xs text-stone-500">
+      <span>{{ trans('common.subtotal')|default('المجموع الفرعي:') }}</span>
+      <span class="font-bold text-stone-900" id="drawerSubtotal">3,100.00 SAR</span>
+    </div>
+    <div class="flex justify-between text-base font-bold text-stone-900 pb-2">
+      <span>{{ trans('common.total')|default('الإجمالي الشامل:') }}</span>
+      <span class="text-[#C5A059]" id="drawerTotal">3,100.00 SAR</span>
+    </div>
+
+    <a 
+      href="/cart" 
+      class="block text-center py-3 bg-[#111111] hover:bg-black text-white text-xs uppercase tracking-wider font-semibold transition">
+      {{ trans('common.view_cart')|default('معاينة السلة الكاملة') }}
+    </a>
+
+    <a 
+      href="{{ salla_checkout_url() }}" 
+      class="block text-center py-3 bg-[#C5A059] hover:bg-[#b08e4d] text-stone-950 text-xs uppercase tracking-wider font-bold transition">
+      {{ trans('common.checkout_now')|default('إتمام الطلب عبر سلة برو') }}
+    </a>
+  </div>
+</aside>

@@ -1,0 +1,85 @@
+{#
+  Template: order-tracking.twig
+  Scope: Salla Twilight Engine Order Tracking and Shipment Status
+#}
+{% extends "layouts.master" %}
+
+{% block title %}
+  {{ trans('common.order_tracking')|default('تتبع مسار الشحنة') }} | {{ store.name }}
+{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 sm:px-6 py-16">
+  <div class="bg-white border border-stone-200 p-8 sm:p-12 shadow-sm">
+    <div class="text-center mb-8">
+      <p class="text-xs uppercase tracking-widest text-[#C5A059] font-bold mb-2">
+        {{ trans('common.courier_service')|default('خدمة التوصيل المصفح والمؤمن') }}
+      </p>
+      <h1 class="text-2xl sm:text-3xl font-serif font-bold text-stone-900 mb-2">
+        {{ trans('common.track_consignment')|default('تتبع حالة ومسار شحنتك') }}
+      </h1>
+      <p class="text-xs sm:text-sm text-stone-500">
+        {{ trans('common.track_desc')|default('أدخل رقم الطلب أو رقم بوليصة الشحن الصادرة من منصة سلة للاستعلام المباشر.') }}
+      </p>
+    </div>
+
+    {# Tracking Form #}
+    <form class="flex flex-col sm:flex-row gap-3 mb-10" onsubmit="event.preventDefault()">
+      <input 
+        type="text" 
+        value="SL-884920" 
+        class="flex-grow px-4 py-3 border border-stone-200 text-sm font-sans focus:outline-none focus:border-stone-900" 
+        placeholder="{{ trans('common.order_number_placeholder')|default('مثال: SL-884920') }}" 
+        required>
+      <button 
+        type="submit" 
+        class="px-8 py-3 bg-[#111111] hover:bg-black text-white text-xs uppercase tracking-wider font-semibold transition">
+        {{ trans('common.inquire')|default('استعلام فوري') }}
+      </button>
+    </form>
+
+    {# Salla Order Status / Timeline Component #}
+    <div class="bg-stone-50 p-4 border border-stone-200 flex flex-wrap justify-between items-center text-xs gap-3 mb-8">
+      <div>
+        <span class="text-stone-400 block">{{ trans('common.order_id')|default('رقم الطلب:') }}</span>
+        <strong class="text-stone-900 font-sans">#SL-884920</strong>
+      </div>
+      <div>
+        <span class="text-stone-400 block">{{ trans('common.carrier')|default('الناقل المعتمد:') }}</span>
+        <strong class="text-stone-900">سمسا إكسبريس (SMSA Express)</strong>
+      </div>
+      <div>
+        <span class="text-stone-400 block">{{ trans('common.status')|default('الحالة الراهنة:') }}</span>
+        <span class="text-[#C5A059] font-bold">{{ trans('common.out_for_delivery')|default('جاري التوصيل المباشر') }}</span>
+      </div>
+    </div>
+
+    {# Timeline steps #}
+    <div class="relative pl-6 rtl:pl-0 rtl:pr-6 border-l-2 rtl:border-l-0 rtl:border-r-2 border-stone-200 space-y-8 my-6">
+      <div class="relative">
+        <span class="absolute -left-[31px] rtl:-left-auto rtl:-right-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#C5A059] border-2 border-white ring-2 ring-[#C5A059]"></span>
+        <h4 class="text-sm font-bold text-stone-900">{{ trans('common.order_confirmed')|default('تم تأكيد الطلب بنجاح') }}</h4>
+        <p class="text-xs text-stone-400 mt-0.5">28 سبتمبر 2026 - 10:30 ص</p>
+      </div>
+
+      <div class="relative">
+        <span class="absolute -left-[31px] rtl:-left-auto rtl:-right-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#C5A059] border-2 border-white ring-2 ring-[#C5A059]"></span>
+        <h4 class="text-sm font-bold text-stone-900">{{ trans('common.packaging_complete')|default('اكتمال التغليف الفاخر والشمعي') }}</h4>
+        <p class="text-xs text-stone-400 mt-0.5">28 سبتمبر 2026 - 02:15 م</p>
+      </div>
+
+      <div class="relative">
+        <span class="absolute -left-[31px] rtl:-left-auto rtl:-right-[31px] top-1 w-3.5 h-3.5 rounded-full bg-[#111111] border-2 border-white ring-4 ring-[#F4EAD4]"></span>
+        <h4 class="text-sm font-bold text-stone-900">{{ trans('common.en_route')|default('في الطريق مع مندوب التوصيل المباشر') }}</h4>
+        <p class="text-xs text-[#C5A059] font-semibold mt-0.5">الرياض - حي حطين (متوقع اليوم)</p>
+      </div>
+
+      <div class="relative opacity-40">
+        <span class="absolute -left-[31px] rtl:-left-auto rtl:-right-[31px] top-1 w-3.5 h-3.5 rounded-full bg-stone-300 border-2 border-white"></span>
+        <h4 class="text-sm font-bold text-stone-700">{{ trans('common.delivered')|default('تم التسليم للعميل') }}</h4>
+        <p class="text-xs text-stone-400 mt-0.5">في انتظار الاستلام النهائي</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

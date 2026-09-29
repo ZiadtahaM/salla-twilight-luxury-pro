@@ -8,15 +8,25 @@ SCREENSHOTS_DIR = os.path.join(ROOT_DIR, "screenshots")
 ARTIFACT_DIR = r"C:\Users\DevUser\.gemini\antigravity-cli\brain\1fdd556b-d842-496b-a55d-0f5b8dacc716"
 
 os.makedirs(SCREENSHOTS_DIR, exist_ok=True)
+os.makedirs(ARTIFACT_DIR, exist_ok=True)
 
 targets = [
+    # 1. Home Arabic & English
     {"name": "desktop-ar.png", "file": "preview-ar.html", "width": 1440, "height": 900, "is_mobile": False},
     {"name": "mobile-ar.png", "file": "preview-ar.html", "width": 360, "height": 780, "is_mobile": True},
     {"name": "desktop-en.png", "file": "preview-en.html", "width": 1440, "height": 900, "is_mobile": False},
     {"name": "mobile-en.png", "file": "preview-en.html", "width": 360, "height": 780, "is_mobile": True},
+    # 2. Key Pages
+    {"name": "desktop-categories.png", "file": "categories.html", "width": 1440, "height": 900, "is_mobile": False},
+    {"name": "desktop-product.png", "file": "product.html", "width": 1440, "height": 900, "is_mobile": False},
+    {"name": "desktop-cart.png", "file": "cart.html", "width": 1440, "height": 900, "is_mobile": False},
+    {"name": "desktop-tracking.png", "file": "tracking.html", "width": 1440, "height": 900, "is_mobile": False},
+    {"name": "desktop-account.png", "file": "account.html", "width": 1440, "height": 900, "is_mobile": False},
+    {"name": "mobile-product.png", "file": "product.html", "width": 360, "height": 780, "is_mobile": True},
+    {"name": "mobile-cart.png", "file": "cart.html", "width": 360, "height": 780, "is_mobile": True},
 ]
 
-print("Initializing offline Playwright capture engine...")
+print("Initializing offline Playwright capture engine for all storefront pages...")
 
 with sync_playwright() as p:
     browser = p.chromium.launch(
@@ -52,15 +62,16 @@ with sync_playwright() as p:
         page.screenshot(path=artifact_path, full_page=False)
         print(f"Captured viewport: {repo_path}")
 
-        # Also capture full-page view to verify product grid and footer
-        full_repo_path = repo_path.replace(".png", "-full.png")
-        full_artifact_path = artifact_path.replace(".png", "-full.png")
-        page.screenshot(path=full_repo_path, full_page=True)
-        page.screenshot(path=full_artifact_path, full_page=True)
-        print(f"Captured full page: {full_repo_path}")
+        # Capture full page for home and categories
+        if "full" not in target["name"]:
+            full_repo_path = repo_path.replace(".png", "-full.png")
+            full_artifact_path = artifact_path.replace(".png", "-full.png")
+            page.screenshot(path=full_repo_path, full_page=True)
+            page.screenshot(path=full_artifact_path, full_page=True)
+            print(f"Captured full page: {full_repo_path}")
         
         page.close()
         
     browser.close()
 
-print("ALL SCREENSHOTS GENERATED DETERMINISTICALLY IN < 3 SECONDS.")
+print("ALL MULTI-PAGE SCREENSHOTS GENERATED DETERMINISTICALLY IN < 5 SECONDS.")

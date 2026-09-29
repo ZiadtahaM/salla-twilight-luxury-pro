@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elite Maison | Official Luxury Boutique</title>
+  <title>Private Reserve Collections | Elite Maison</title>
   <style>
     
   :root {
@@ -233,81 +233,37 @@
     .footer-bar { flex-direction: column; gap: 1rem; }
   }
 
+    .catalog-hero {
+      background: #141312; color: #fff; padding: 4.5rem 1.5rem; text-align: center;
+      border-bottom: 1px solid var(--lux-border);
+    }
+    .catalog-hero h1 { font-family: var(--font-serif); font-size: 2.8rem; margin-bottom: 0.5rem; color: #fff; }
+    .catalog-hero p { color: #BBB7AD; font-size: 1rem; max-width: 600px; margin: 0 auto; }
+
+    .catalog-layout {
+      max-width: 1320px; margin: 3rem auto; padding: 0 1.5rem;
+      display: grid; grid-template-columns: 260px 1fr; gap: 3rem;
+    }
+    .filter-box {
+      background: var(--lux-surface); border: 1px solid var(--lux-border); padding: 1.5rem;
+      border-radius: 2px; position: sticky; top: 90px;
+    }
+    .filter-box h3 { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.25rem; font-weight:700; }
+    .filter-group { margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--lux-border); }
+    .filter-group h4 { font-size: 0.8rem; text-transform: uppercase; color: var(--lux-muted); margin-bottom: 0.75rem; font-weight:600; }
+    .filter-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; margin-bottom: 0.5rem; cursor: pointer; }
     
-    /* Hero Banner 2.0 */
-    .hero-section {
-      position: relative; width: 100%; min-height: 600px;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden; background: #0E0D0C;
+    .toolbar {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--lux-border);
     }
-    .hero-bg-picture, .hero-bg-picture img {
-      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    .select-sort {
+      padding: 0.5rem 1rem; border: 1px solid var(--lux-border); background: #fff;
+      font-size: 0.85rem; border-radius: 2px;
     }
-    .hero-overlay {
-      position: absolute; inset: 0; background: rgba(14, 13, 12, 0.45);
+    .product-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
     }
-    .hero-content {
-      position: relative; z-index: 10; max-width: 820px; margin: 0 auto;
-      padding: 4rem 1.5rem; text-align: center; color: #fff;
-    }
-    .hero-eyebrow {
-      display: inline-block; font-size: 0.8rem; text-transform: uppercase;
-      letter-spacing: 0.15em; color: var(--lux-gold); font-weight: 700; margin-bottom: 1.25rem;
-    }
-    .hero-title {
-      font-family: var(--font-serif); font-size: 3.5rem; font-weight: 700;
-      line-height: 1.15; margin-bottom: 1.25rem; text-shadow: 0 4px 20px rgba(0,0,0,0.6);
-    }
-    .hero-subtitle {
-      font-size: 1.1rem; line-height: 1.8; color: #E5E2DC; max-width: 640px; margin: 0 auto 2.5rem;
-    }
-    .hero-cta {
-      display: inline-flex; align-items: center; gap: 0.75rem;
-      padding: 1.1rem 2.5rem; background: var(--lux-gold); color: #000;
-      font-weight: 700; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 0.1em;
-      border: none; cursor: pointer; transition: background 0.2s;
-    }
-    .hero-cta:hover { background: #dfc488; }
-
-    /* Trust Invariants Strip */
-    .trust-strip {
-      background: var(--lux-surface); border-bottom: 1px solid var(--lux-border);
-      padding: 1.5rem 1rem;
-    }
-    .trust-wrap {
-      max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem; text-align: center;
-    }
-    .trust-item h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 0.2rem; color: var(--lux-black); }
-    .trust-item p { font-size: 0.75rem; color: var(--lux-muted); }
-
-    /* Category Blocks */
-    .section-wrap { max-width: 1320px; margin: 5rem auto; padding: 0 1.5rem; }
-    .section-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--lux-border);
-    }
-    .section-title { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 700; color: var(--lux-black); }
-    .section-subtitle { font-size: 0.88rem; color: var(--lux-muted); margin-top: 0.25rem; }
-    .view-all-link { font-size: 0.85rem; font-weight: 600; color: var(--lux-black); }
-
-    .category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    .category-card {
-      position: relative; height: 320px; overflow: hidden; background: #222;
-      display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem;
-      border: 1px solid var(--lux-border); transition: transform 0.3s;
-    }
-    .category-card:hover { transform: translateY(-4px); }
-    .category-card img {
-      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6;
-      transition: transform 0.6s ease;
-    }
-    .category-card:hover img { transform: scale(1.05); opacity: 0.75; }
-    .category-card-content { position: relative; z-index: 2; color: #fff; }
-    .category-card-content h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.25rem; }
-
-    /* Featured Products Grid */
-    .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
     .product-card {
       background: var(--lux-surface); border: 1px solid var(--lux-border);
       display: flex; flex-direction: column; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -315,32 +271,30 @@
     .product-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0,0,0,0.06); border-color: var(--lux-gold); }
     .card-img-wrap { position: relative; aspect-ratio: 3/4; overflow: hidden; background: #eee; }
     .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-    .product-card:hover .card-img-wrap img { transform: scale(1.04); }
-    .card-badge {
+    .product-card:hover .card-img-wrap img { transform: scale(1.05); }
+    .badge {
       position: absolute; top: 0.75rem; left: 0.75rem;
       background: #000; color: var(--lux-gold); font-size: 0.65rem; font-weight: 700;
       padding: 0.25rem 0.6rem; text-transform: uppercase;
     }
-    .card-body { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
-    .card-body h3 { font-size: 0.95rem; margin-bottom: 0.3rem; font-weight: 600; line-height: 1.4; }
-    .card-foot {
+    .card-info { padding: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+    .card-info h3 { font-size: 0.95rem; margin-bottom: 0.3rem; font-weight: 600; line-height: 1.4; }
+    .card-bottom {
       display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid var(--lux-border);
     }
-    .btn-card-add {
+    .btn-add {
       background: var(--lux-black); color: #fff; border: none; padding: 0.5rem 0.9rem;
       font-size: 0.78rem; font-weight: 600; cursor: pointer; border-radius: 2px;
     }
-    .btn-card-add:hover { background: #000; }
+    .btn-add:hover { background: #000; }
 
     @media (max-width: 900px) {
-      .hero-title { font-size: 2.3rem; }
-      .trust-wrap { grid-template-columns: repeat(2, 1fr); }
-      .category-grid { grid-template-columns: 1fr; }
+      .catalog-layout { grid-template-columns: 1fr; }
+      .filter-box { display: none; }
       .product-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
       .product-grid { grid-template-columns: 1fr; }
-      .trust-wrap { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -358,15 +312,15 @@
           <span class="brand-logo">ELITE MAISON</span>
         </a>
         <nav class="desktop-nav">
-          <a href="preview-en.html" class="active">Home</a>
-          <a href="categories-en.html" class="">Collections</a>
+          <a href="preview-en.html" class="">Home</a>
+          <a href="categories-en.html" class="active">Collections</a>
           <a href="product-en.html" class="">Exclusives</a>
           <a href="tracking-en.html" class="">Track Order</a>
         </nav>
       </div>
 
       <div class="header-actions">
-        <a href="index.html" class="btn-lang">عربي</a>
+        <a href="categories.html" class="btn-lang">عربي</a>
         <button class="btn-cart-trigger" onclick="openCart()" aria-label="Cart">
           <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
           <span class="badge-count" id="headerCartCount">2</span>
@@ -379,107 +333,65 @@
     </div>
   </header>
   
+  
+  <div class="catalog-hero">
+    <h1>Private Reserve Collections</h1>
+    <p>Rare pieces crafted with exceptional precision for discerning collectors.</p>
+  </div>
 
-  <main id="main">
-    <!-- Hero Banner 2.0 -->
-    <section class="hero-section">
-      <picture class="hero-bg-picture">
-        <source media="(min-width: 768px)" srcset="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9Ijk2MCIgdmlld0JveD0iMCAwIDE5MjAgOTYwIj4KICAgIDxkZWZzPgogICAgICA8cmFkaWFsR3JhZGllbnQgaWQ9Imhlcm9HbG93IiBjeD0iMjUlIiBjeT0iNDAlIiByPSI2NSUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyYzI3MjAiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjQ1JSIgc3RvcC1jb2xvcj0iIzE5MTcxNSIvPgogICAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzBjMGIwYSIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGRBY2MiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNERkM0ODgiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI0M1QTA1OSIvPgogICAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzhFNkEyNiIvPgogICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgICA8cGF0dGVybiBpZD0iYXJhYmVzcXVlR3JpZCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgICA8cGF0aCBkPSJNNDAgMCBMODAgNDAgTDQwIDgwIEwwIDQwIFoiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIwLjc1IiBzdHJva2Utb3BhY2l0eT0iMC4xMiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjQwIiBjeT0iNDAiIHI9IjE0IiBmaWxsPSJub25lIiBzdHJva2U9IiNDNUEwNTkiIHN0cm9rZS13aWR0aD0iMC41IiBzdHJva2Utb3BhY2l0eT0iMC4xIi8+CiAgICAgICAgPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNCIgZmlsbD0iI0M1QTA1OSIgZmlsbC1vcGFjaXR5PSIwLjE1Ii8+CiAgICAgIDwvcGF0dGVybj4KICAgIDwvZGVmcz4KICAgIDxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9Ijk2MCIgZmlsbD0idXJsKCNoZXJvR2xvdykiLz4KICAgIDxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9Ijk2MCIgZmlsbD0idXJsKCNhcmFiZXNxdWVHcmlkKSIvPgogICAgCiAgICA8IS0tIEF0bW9zcGhlcmljIEx1eHVyeSBTaWxob3VldHRlIEN1cnZlcyAtLT4KICAgIDxwYXRoIGQ9Ik0wLDcyMCBRODY0LDU3NiAxOTIwLDc2OCBMMTkyMCw5NjAgTDAsOTYwIFoiIGZpbGw9IiMwODA3MDciIGZpbGwtb3BhY2l0eT0iMC43Ii8+CiAgICA8cGF0aCBkPSJNMCw4MTYgUTExNTIsNjkxLjE5OTk5OTk5OTk5OTkgMTkyMCw4NjQgTDE5MjAsOTYwIEwwLDk2MCBaIiBmaWxsPSIjMDQwNDA0IiBmaWxsLW9wYWNpdHk9IjAuODUiLz4KICAgIAogICAgPCEtLSBHb2xkIEFjY2VudHMgLS0+CiAgICA8Y2lyY2xlIGN4PSIzNDUuNTk5OTk5OTk5OTk5OTciIGN5PSIzMzYiIHI9IjI2OC44IiBmaWxsPSJ1cmwoI2dvbGRBY2MpIiBmaWxsLW9wYWNpdHk9IjAuMDYiLz4KICAgIDxjaXJjbGUgY3g9IjE0NDAiIGN5PSI1NzYiIHI9IjE5MiIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1vcGFjaXR5PSIwLjAyIi8+CiAgPC9zdmc+">
-        <source media="(max-width: 767px)" srcset="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgdmlld0JveD0iMCAwIDgwMCAxMDAwIj4KICAgIDxkZWZzPgogICAgICA8cmFkaWFsR3JhZGllbnQgaWQ9Imhlcm9HbG93IiBjeD0iMjUlIiBjeT0iNDAlIiByPSI2NSUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyYzI3MjAiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjQ1JSIgc3RvcC1jb2xvcj0iIzE5MTcxNSIvPgogICAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzBjMGIwYSIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGRBY2MiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNERkM0ODgiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI0M1QTA1OSIvPgogICAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzhFNkEyNiIvPgogICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgICA8cGF0dGVybiBpZD0iYXJhYmVzcXVlR3JpZCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgICA8cGF0aCBkPSJNNDAgMCBMODAgNDAgTDQwIDgwIEwwIDQwIFoiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIwLjc1IiBzdHJva2Utb3BhY2l0eT0iMC4xMiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjQwIiBjeT0iNDAiIHI9IjE0IiBmaWxsPSJub25lIiBzdHJva2U9IiNDNUEwNTkiIHN0cm9rZS13aWR0aD0iMC41IiBzdHJva2Utb3BhY2l0eT0iMC4xIi8+CiAgICAgICAgPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNCIgZmlsbD0iI0M1QTA1OSIgZmlsbC1vcGFjaXR5PSIwLjE1Ii8+CiAgICAgIDwvcGF0dGVybj4KICAgIDwvZGVmcz4KICAgIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0idXJsKCNoZXJvR2xvdykiLz4KICAgIDxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iMTAwMCIgZmlsbD0idXJsKCNhcmFiZXNxdWVHcmlkKSIvPgogICAgCiAgICA8IS0tIEF0bW9zcGhlcmljIEx1eHVyeSBTaWxob3VldHRlIEN1cnZlcyAtLT4KICAgIDxwYXRoIGQ9Ik0wLDc1MCBRMzYwLDYwMCA4MDAsODAwIEw4MDAsMTAwMCBMMCwxMDAwIFoiIGZpbGw9IiMwODA3MDciIGZpbGwtb3BhY2l0eT0iMC43Ii8+CiAgICA8cGF0aCBkPSJNMCw4NTAgUTQ4MCw3MjAgODAwLDkwMCBMODAwLDEwMDAgTDAsMTAwMCBaIiBmaWxsPSIjMDQwNDA0IiBmaWxsLW9wYWNpdHk9IjAuODUiLz4KICAgIAogICAgPCEtLSBHb2xkIEFjY2VudHMgLS0+CiAgICA8Y2lyY2xlIGN4PSIxNDQiIGN5PSIzNTAiIHI9IjI4MCIgZmlsbD0idXJsKCNnb2xkQWNjKSIgZmlsbC1vcGFjaXR5PSIwLjA2Ii8+CiAgICA8Y2lyY2xlIGN4PSI2MDAiIGN5PSI2MDAiIHI9IjIwMCIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1vcGFjaXR5PSIwLjAyIi8+CiAgPC9zdmc+">
-        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9Ijk2MCIgdmlld0JveD0iMCAwIDE5MjAgOTYwIj4KICAgIDxkZWZzPgogICAgICA8cmFkaWFsR3JhZGllbnQgaWQ9Imhlcm9HbG93IiBjeD0iMjUlIiBjeT0iNDAlIiByPSI2NSUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiMyYzI3MjAiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjQ1JSIgc3RvcC1jb2xvcj0iIzE5MTcxNSIvPgogICAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzBjMGIwYSIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGRBY2MiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNERkM0ODgiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjUwJSIgc3RvcC1jb2xvcj0iI0M1QTA1OSIvPgogICAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzhFNkEyNiIvPgogICAgICA8L2xpbmVhckdyYWRpZW50PgogICAgICA8cGF0dGVybiBpZD0iYXJhYmVzcXVlR3JpZCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgICA8cGF0aCBkPSJNNDAgMCBMODAgNDAgTDQwIDgwIEwwIDQwIFoiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIwLjc1IiBzdHJva2Utb3BhY2l0eT0iMC4xMiIvPgogICAgICAgIDxjaXJjbGUgY3g9IjQwIiBjeT0iNDAiIHI9IjE0IiBmaWxsPSJub25lIiBzdHJva2U9IiNDNUEwNTkiIHN0cm9rZS13aWR0aD0iMC41IiBzdHJva2Utb3BhY2l0eT0iMC4xIi8+CiAgICAgICAgPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNCIgZmlsbD0iI0M1QTA1OSIgZmlsbC1vcGFjaXR5PSIwLjE1Ii8+CiAgICAgIDwvcGF0dGVybj4KICAgIDwvZGVmcz4KICAgIDxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9Ijk2MCIgZmlsbD0idXJsKCNoZXJvR2xvdykiLz4KICAgIDxyZWN0IHdpZHRoPSIxOTIwIiBoZWlnaHQ9Ijk2MCIgZmlsbD0idXJsKCNhcmFiZXNxdWVHcmlkKSIvPgogICAgCiAgICA8IS0tIEF0bW9zcGhlcmljIEx1eHVyeSBTaWxob3VldHRlIEN1cnZlcyAtLT4KICAgIDxwYXRoIGQ9Ik0wLDcyMCBRODY0LDU3NiAxOTIwLDc2OCBMMTkyMCw5NjAgTDAsOTYwIFoiIGZpbGw9IiMwODA3MDciIGZpbGwtb3BhY2l0eT0iMC43Ii8+CiAgICA8cGF0aCBkPSJNMCw4MTYgUTExNTIsNjkxLjE5OTk5OTk5OTk5OTkgMTkyMCw4NjQgTDE5MjAsOTYwIEwwLDk2MCBaIiBmaWxsPSIjMDQwNDA0IiBmaWxsLW9wYWNpdHk9IjAuODUiLz4KICAgIAogICAgPCEtLSBHb2xkIEFjY2VudHMgLS0+CiAgICA8Y2lyY2xlIGN4PSIzNDUuNTk5OTk5OTk5OTk5OTciIGN5PSIzMzYiIHI9IjI2OC44IiBmaWxsPSJ1cmwoI2dvbGRBY2MpIiBmaWxsLW9wYWNpdHk9IjAuMDYiLz4KICAgIDxjaXJjbGUgY3g9IjE0NDAiIGN5PSI1NzYiIHI9IjE5MiIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1vcGFjaXR5PSIwLjAyIi8+CiAgPC9zdmc+" alt="Elite Maison Luxury Reserve">
-      </picture>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <span class="hero-eyebrow">Winter 2026 Private Reserve</span>
-        <h1 class="hero-title">Timeless Luxury, Crafted to Perfection</h1>
-        <p class="hero-subtitle">Handpicked rare pieces designed for discerning connoisseurs who appreciate pure craftsmanship.</p>
-        <a href="categories-en.html" class="hero-cta">
-          <span>Explore Reserve</span>
-          <span>&larr;</span>
-        </a>
+  <main class="catalog-layout" id="main">
+    <aside class="filter-box">
+      <h3>Refine Catalog</h3>
+      <div class="filter-group">
+        <h4>Category</h4>
+        <label class="filter-item"><input type="checkbox" checked> Couture & Abayas (4)</label>
+        <label class="filter-item"><input type="checkbox" checked> Royal Fragrances (2)</label>
+        <label class="filter-item"><input type="checkbox" checked> Artisan Leather (1)</label>
+        <label class="filter-item"><input type="checkbox" checked> Imperial Porcelain (1)</label>
       </div>
-    </section>
+      <div class="filter-group">
+        <h4>Price Range (SAR)</h4>
+        <input type="range" min="500" max="5000" value="3500" style="width:100%; accent-color:var(--lux-gold);">
+        <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--lux-muted); margin-top:0.3rem;">
+          <span>500 SAR</span>
+          <span>5,000 SAR</span>
+        </div>
+      </div>
+      <div class="filter-group">
+        <h4>Availability</h4>
+        <label class="filter-item"><input type="checkbox" checked> In Stock (Express Dispatch)</label>
+        <label class="filter-item"><input type="checkbox"> Pre-order Reserved</label>
+      </div>
+    </aside>
 
-    <!-- Trust Invariants Strip -->
-    <section class="trust-strip">
-      <div class="trust-wrap">
-        <div class="trust-item">
-          <h4>Master Craftsmanship</h4>
-          <p>Artisan crafted in Riyadh & Italy</p>
-        </div>
-        <div class="trust-item">
-          <h4>Insured Express Courier</h4>
-          <p>Delivered in 24-48 hrs via SMSA</p>
-        </div>
-        <div class="trust-item">
-          <h4>Interest-Free Installments</h4>
-          <p>Split in 4 via Tamara & Tabby</p>
-        </div>
-        <div class="trust-item">
-          <h4>Certified Salla Pro Store</h4>
-          <p>100% secure checkout</p>
-        </div>
+    <div>
+      <div class="toolbar">
+        <span style="font-size:0.85rem; color:var(--lux-muted); font-weight:500;">
+          Showing 8 of 8 exclusive items
+        </span>
+        <select class="select-sort">
+          <option>Latest Release</option>
+          <option>Most Exclusive</option>
+          <option>Price: High to Low</option>
+          <option>Price: Low to High</option>
+        </select>
       </div>
-    </section>
 
-    <!-- Curated Categories -->
-    <section class="section-wrap">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Curated Collections</h2>
-          <p class="section-subtitle">Explore signature categories refined for elegance</p>
-        </div>
-        <a href="categories-en.html" class="view-all-link">View All &rarr;</a>
-      </div>
-      <div class="category-grid">
-        <a href="categories-en.html" class="category-card">
-          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIENhc2htZXJlIEFiYXlhIFNpbGhvdWV0dGUgLS0+CiAgICAgIDxwYXRoIGQ9Ik0xNTAgMTEwIFEyMDAgODAgMjUwIDExMCBMMjkwIDQyMCBRMjAwIDQ0MCAxMTAgNDIwIFoiIGZpbGw9IiMxNTE0MTMiLz4KICAgICAgPHBhdGggZD0iTTIwMCAxMTAgTDIwMCA0MjUiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgICAgPHBhdGggZD0iTTE4NSAxMzAgUTIwMCAxNDUgMjE1IDEzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjREZDNDg4IiBzdHJva2Utd2lkdGg9IjIuNSIvPgogICAgICA8cGF0aCBkPSJNMTc1IDE2MCBRMjAwIDE4MCAyMjUgMTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiNERkM0ODgiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMTAiIHI9IjMiIGZpbGw9IiNDNUEwNTkiLz4KICAgICAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMjQwIiByPSIzIiBmaWxsPSIjQzVBMDU5Ii8+CiAgICAgIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjI3MCIgcj0iMyIgZmlsbD0iI0M1QTA1OSIvPgogICAgCiAgPC9zdmc+" alt="Couture">
-          <div class="category-card-content">
-            <h3>Haute Couture & Abayas</h3>
-            <span style="font-size:0.8rem; color:var(--lux-gold); font-weight:600;">4 Pieces</span>
-          </div>
-        </a>
-        <a href="categories-en.html" class="category-card">
-          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIENyeXN0YWwgT3VkIEZsYWNvbiAtLT4KICAgICAgPHJlY3QgeD0iMTgwIiB5PSI5MCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjM1IiByeD0iMyIgZmlsbD0iI0M1QTA1OSIvPgogICAgICA8cGF0aCBkPSJNMTkwIDcwIEwyMTAgNzAgTDIxNSA5MCBMMTg1IDkwIFoiIGZpbGw9IiNERkM0ODgiLz4KICAgICAgPHJlY3QgeD0iMTM1IiB5PSIxMjUiIHdpZHRoPSIxMzAiIGhlaWdodD0iMTkwIiByeD0iMTQiIGZpbGw9IiMyQTFCMEUiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgICAgIDxyZWN0IHg9IjE0NSIgeT0iMTM1IiB3aWR0aD0iMTEwIiBoZWlnaHQ9IjE3MCIgcng9IjgiIGZpbGw9IiNCODczMjIiIGZpbGwtb3BhY2l0eT0iMC44Ii8+CiAgICAgIDwhLS0gTGFiZWwgLS0+CiAgICAgIDxyZWN0IHg9IjE2MCIgeT0iMTg1IiB3aWR0aD0iODAiIGhlaWdodD0iNzAiIGZpbGw9IiNGQUY5RjYiLz4KICAgICAgPHJlY3QgeD0iMTY1IiB5PSIxOTAiIHdpZHRoPSI3MCIgaGVpZ2h0PSI2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzVBMDU5IiBzdHJva2Utd2lkdGg9IjEiLz4KICAgICAgPHRleHQgeD0iMjAwIiB5PSIyMTUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMxMTEiPk9VRCBST1lBTDwvdGV4dD4KICAgICAgPHRleHQgeD0iMjAwIiB5PSIyMzUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjciIGxldHRlci1zcGFjaW5nPSIxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjODg4Ij5BR0VEIEVYVFJBQ1Q8L3RleHQ+CiAgICAKICA8L3N2Zz4=" alt="Fragrance">
-          <div class="category-card-content">
-            <h3>Royal Fragrance & Oud</h3>
-            <span style="font-size:0.8rem; color:var(--lux-gold); font-weight:600;">2 Blends</span>
-          </div>
-        </a>
-        <a href="categories-en.html" class="category-card">
-          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIExlYXRoZXIgSGFuZGJhZyAtLT4KICAgICAgPHBhdGggZD0iTTE2MCAxNjAgUTIwMCA4MCAyNDAgMTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiNDNUEwNTkiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICAgIDxwYXRoIGQ9Ik0xMjUgMTYwIEwyNzUgMTYwIEwyOTUgMzUwIFEyMDAgMzcwIDEwNSAzNTAgWiIgZmlsbD0iIzhCNDUxMyIvPgogICAgICA8cGF0aCBkPSJNMTQwIDE2MCBMMTQwIDM1NSIgc3Ryb2tlPSIjNjMzMDBDIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjQsNCIvPgogICAgICA8cGF0aCBkPSJNMjYwIDE2MCBMMjYwIDM1NSIgc3Ryb2tlPSIjNjMzMDBDIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjQsNCIvPgogICAgICA8cmVjdCB4PSIxODUiIHk9IjE5MCIgd2lkdGg9IjMwIiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iI0RGQzQ4OCIgc3Ryb2tlPSIjOEU2QTI2IiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgCiAgPC9zdmc+" alt="Leather">
-          <div class="category-card-content">
-            <h3>Artisan Leather & Living</h3>
-            <span style="font-size:0.8rem; color:var(--lux-gold); font-weight:600;">2 Pieces</span>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Featured Products -->
-    <section class="section-wrap" style="margin-top:2rem;">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Private Reserve Exclusives</h2>
-          <p class="section-subtitle">Most coveted collector releases of the season</p>
-        </div>
-        <a href="categories-en.html" class="view-all-link">Explore All &rarr;</a>
-      </div>
       <div class="product-grid">
         
           <article class="product-card">
             <div class="card-img-wrap">
               <a href="product-en.html"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIENhc2htZXJlIEFiYXlhIFNpbGhvdWV0dGUgLS0+CiAgICAgIDxwYXRoIGQ9Ik0xNTAgMTEwIFEyMDAgODAgMjUwIDExMCBMMjkwIDQyMCBRMjAwIDQ0MCAxMTAgNDIwIFoiIGZpbGw9IiMxNTE0MTMiLz4KICAgICAgPHBhdGggZD0iTTIwMCAxMTAgTDIwMCA0MjUiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgICAgPHBhdGggZD0iTTE4NSAxMzAgUTIwMCAxNDUgMjE1IDEzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjREZDNDg4IiBzdHJva2Utd2lkdGg9IjIuNSIvPgogICAgICA8cGF0aCBkPSJNMTc1IDE2MCBRMjAwIDE4MCAyMjUgMTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiNERkM0ODgiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMTAiIHI9IjMiIGZpbGw9IiNDNUEwNTkiLz4KICAgICAgPGNpcmNsZSBjeD0iMjAwIiBjeT0iMjQwIiByPSIzIiBmaWxsPSIjQzVBMDU5Ii8+CiAgICAgIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjI3MCIgcj0iMyIgZmlsbD0iI0M1QTA1OSIvPgogICAgCiAgPC9zdmc+" alt="Hand-Embroidered Cashmere Velvet Abaya"></a>
-              <span class="card-badge">Limited Reserve</span>
+              <span class="badge">Limited Reserve</span>
             </div>
-            <div class="card-body">
+            <div class="card-info">
               <div>
-                <span style="font-size:0.7rem; text-transform:uppercase; color:var(--lux-gold); font-weight:700;">Haute Couture</span>
-                <h3 style="margin-top:0.25rem;"><a href="product-en.html">Hand-Embroidered Cashmere Velvet Abaya</a></h3>
+                <span style="font-size:0.7rem; text-transform:uppercase; color:var(--lux-gold); font-weight:600;">Haute Couture</span>
+                <h3 style="margin-top:0.2rem;"><a href="product-en.html">Hand-Embroidered Cashmere Velvet Abaya</a></h3>
               </div>
-              <div class="card-foot">
+              <div class="card-bottom">
                 <span style="font-weight:700; font-size:0.95rem;">1,850.00 SAR</span>
-                <button class="btn-card-add" onclick="openCart()">Add to Bag</button>
+                <button class="btn-add" onclick="openCart()">Add to Cart</button>
               </div>
             </div>
           </article>
@@ -487,16 +399,16 @@
           <article class="product-card">
             <div class="card-img-wrap">
               <a href="product-en.html"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIENyeXN0YWwgT3VkIEZsYWNvbiAtLT4KICAgICAgPHJlY3QgeD0iMTgwIiB5PSI5MCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjM1IiByeD0iMyIgZmlsbD0iI0M1QTA1OSIvPgogICAgICA8cGF0aCBkPSJNMTkwIDcwIEwyMTAgNzAgTDIxNSA5MCBMMTg1IDkwIFoiIGZpbGw9IiNERkM0ODgiLz4KICAgICAgPHJlY3QgeD0iMTM1IiB5PSIxMjUiIHdpZHRoPSIxMzAiIGhlaWdodD0iMTkwIiByeD0iMTQiIGZpbGw9IiMyQTFCMEUiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgICAgIDxyZWN0IHg9IjE0NSIgeT0iMTM1IiB3aWR0aD0iMTEwIiBoZWlnaHQ9IjE3MCIgcng9IjgiIGZpbGw9IiNCODczMjIiIGZpbGwtb3BhY2l0eT0iMC44Ii8+CiAgICAgIDwhLS0gTGFiZWwgLS0+CiAgICAgIDxyZWN0IHg9IjE2MCIgeT0iMTg1IiB3aWR0aD0iODAiIGhlaWdodD0iNzAiIGZpbGw9IiNGQUY5RjYiLz4KICAgICAgPHJlY3QgeD0iMTY1IiB5PSIxOTAiIHdpZHRoPSI3MCIgaGVpZ2h0PSI2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzVBMDU5IiBzdHJva2Utd2lkdGg9IjEiLz4KICAgICAgPHRleHQgeD0iMjAwIiB5PSIyMTUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMxMTEiPk9VRCBST1lBTDwvdGV4dD4KICAgICAgPHRleHQgeD0iMjAwIiB5PSIyMzUiIGZvbnQtZmFtaWx5PSJzYW5zLXNlcmlmIiBmb250LXNpemU9IjciIGxldHRlci1zcGFjaW5nPSIxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjODg4Ij5BR0VEIEVYVFJBQ1Q8L3RleHQ+CiAgICAKICA8L3N2Zz4=" alt="Royal Aged Oud Crystal Decanter 100ml"></a>
-              <span class="card-badge">Bestseller</span>
+              <span class="badge">Bestseller</span>
             </div>
-            <div class="card-body">
+            <div class="card-info">
               <div>
-                <span style="font-size:0.7rem; text-transform:uppercase; color:var(--lux-gold); font-weight:700;">Private Blend</span>
-                <h3 style="margin-top:0.25rem;"><a href="product-en.html">Royal Aged Oud Crystal Decanter 100ml</a></h3>
+                <span style="font-size:0.7rem; text-transform:uppercase; color:var(--lux-gold); font-weight:600;">Private Blend</span>
+                <h3 style="margin-top:0.2rem;"><a href="product-en.html">Royal Aged Oud Crystal Decanter 100ml</a></h3>
               </div>
-              <div class="card-foot">
+              <div class="card-bottom">
                 <span style="font-weight:700; font-size:0.95rem;">1,250.00 SAR</span>
-                <button class="btn-card-add" onclick="openCart()">Add to Bag</button>
+                <button class="btn-add" onclick="openCart()">Add to Cart</button>
               </div>
             </div>
           </article>
@@ -504,16 +416,16 @@
           <article class="product-card">
             <div class="card-img-wrap">
               <a href="product-en.html"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIExlYXRoZXIgSGFuZGJhZyAtLT4KICAgICAgPHBhdGggZD0iTTE2MCAxNjAgUTIwMCA4MCAyNDAgMTYwIiBmaWxsPSJub25lIiBzdHJva2U9IiNDNUEwNTkiIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICAgIDxwYXRoIGQ9Ik0xMjUgMTYwIEwyNzUgMTYwIEwyOTUgMzUwIFEyMDAgMzcwIDEwNSAzNTAgWiIgZmlsbD0iIzhCNDUxMyIvPgogICAgICA8cGF0aCBkPSJNMTQwIDE2MCBMMTQwIDM1NSIgc3Ryb2tlPSIjNjMzMDBDIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjQsNCIvPgogICAgICA8cGF0aCBkPSJNMjYwIDE2MCBMMjYwIDM1NSIgc3Ryb2tlPSIjNjMzMDBDIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjQsNCIvPgogICAgICA8cmVjdCB4PSIxODUiIHk9IjE5MCIgd2lkdGg9IjMwIiBoZWlnaHQ9IjI0IiByeD0iNCIgZmlsbD0iI0RGQzQ4OCIgc3Ryb2tlPSIjOEU2QTI2IiBzdHJva2Utd2lkdGg9IjEuNSIvPgogICAgCiAgPC9zdmc+" alt="Artisan Bridle Leather Luxury Tote"></a>
-              <span class="card-badge">Private Vault</span>
+              <span class="badge">Private Vault</span>
             </div>
-            <div class="card-body">
+            <div class="card-info">
               <div>
-                <span style="font-size:0.7rem; text-transform:uppercase; color:var(--lux-gold); font-weight:700;">Artisan Leather</span>
-                <h3 style="margin-top:0.25rem;"><a href="product-en.html">Artisan Bridle Leather Luxury Tote</a></h3>
+                <span style="font-size:0.7rem; text-transform:uppercase; color:var(--lux-gold); font-weight:600;">Artisan Leather</span>
+                <h3 style="margin-top:0.2rem;"><a href="product-en.html">Artisan Bridle Leather Luxury Tote</a></h3>
               </div>
-              <div class="card-foot">
+              <div class="card-bottom">
                 <span style="font-weight:700; font-size:0.95rem;">3,400.00 SAR</span>
-                <button class="btn-card-add" onclick="openCart()">Add to Bag</button>
+                <button class="btn-add" onclick="openCart()">Add to Cart</button>
               </div>
             </div>
           </article>
@@ -521,22 +433,90 @@
           <article class="product-card">
             <div class="card-img-wrap">
               <a href="product-en.html"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIEltcGVyaWFsIFBvcmNlbGFpbiBUZWEgJiBLYWh3YSBTZXQgLS0+CiAgICAgIDxwYXRoIGQ9Ik0xNTAgMjAwIFEyMDAgMTYwIDI1MCAyMDAgTDI0MCAzMTAgUTIwMCAzMzAgMTYwIDMxMCBaIiBmaWxsPSIjRkFGOUY2IiBzdHJva2U9IiNFNUUyREMiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgICA8cGF0aCBkPSJNMjQ1IDIyMCBRMjkwIDI1MCAyMzUgMjkwIiBmaWxsPSJub25lIiBzdHJva2U9IiNDNUEwNTkiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICAgIDxwYXRoIGQ9Ik0xNTUgMjMwIFExMjAgMjEwIDEzNSAyNzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgICAgIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjE4MCIgcj0iMTQiIGZpbGw9IiNDNUEwNTkiLz4KICAgICAgPHBhdGggZD0iTTE3MCAyNDAgUTIwMCAyNTUgMjMwIDI0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQzVBMDU5IiBzdHJva2Utd2lkdGg9IjIiLz4KICAgIAogIDwvc3ZnPg==" alt="Imperial 24K Gold Trim Porcelain Tea Set"></a>
-              <span class="card-badge">Handcrafted</span>
+              <span class="badge">Handcrafted</span>
             </div>
-            <div class="card-body">
+            <div class="card-info">
               <div>
-                <span style="font-size:0.7rem; text-transform:uppercase; color:var(--lux-gold); font-weight:700;">Imperial Living</span>
-                <h3 style="margin-top:0.25rem;"><a href="product-en.html">Imperial 24K Gold Trim Porcelain Tea Set</a></h3>
+                <span style="font-size:0.7rem; text-transform:uppercase; color:var(--lux-gold); font-weight:600;">Imperial Living</span>
+                <h3 style="margin-top:0.2rem;"><a href="product-en.html">Imperial 24K Gold Trim Porcelain Tea Set</a></h3>
               </div>
-              <div class="card-foot">
+              <div class="card-bottom">
                 <span style="font-weight:700; font-size:0.95rem;">980.00 SAR</span>
-                <button class="btn-card-add" onclick="openCart()">Add to Bag</button>
+                <button class="btn-add" onclick="openCart()">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+        
+          <article class="product-card">
+            <div class="card-img-wrap">
+              <a href="product-en.html"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIFJveWFsIEVtZXJhbGQgU2lsayBLYWZ0YW4gLS0+CiAgICAgIDxwYXRoIGQ9Ik0xNDAgMTEwIFEyMDAgODUgMjYwIDExMCBMMzAwIDQyMCBRMjAwIDQ0MCAxMDAgNDIwIFoiIGZpbGw9IiMwQjNCMjQiLz4KICAgICAgPHBhdGggZD0iTTIwMCAxMTAgTDIwMCA0MjUiIHN0cm9rZT0iI0M1QTA1OSIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgICAgIDxwYXRoIGQ9Ik0xNzAgMTEwIEwyMzAgMTEwIEwyMTUgMTcwIEwxODUgMTcwIFoiIGZpbGw9IiNDNUEwNTkiLz4KICAgIAogIDwvc3ZnPg==" alt="Royal Emerald Pure Silk Kaftan"></a>
+              <span class="badge">One of One</span>
+            </div>
+            <div class="card-info">
+              <div>
+                <span style="font-size:0.7rem; text-transform:uppercase; color:var(--lux-gold); font-weight:600;">Haute Couture</span>
+                <h3 style="margin-top:0.2rem;"><a href="product-en.html">Royal Emerald Pure Silk Kaftan</a></h3>
+              </div>
+              <div class="card-bottom">
+                <span style="font-weight:700; font-size:0.95rem;">2,200.00 SAR</span>
+                <button class="btn-add" onclick="openCart()">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+        
+          <article class="product-card">
+            <div class="card-img-wrap">
+              <a href="product-en.html"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIEltcGVyaWFsIFdoaXRlIE11c2sgVmlhbCAtLT4KICAgICAgPHJlY3QgeD0iMTc1IiB5PSIxMDAiIHdpZHRoPSI1MCIgaGVpZ2h0PSIyMjAiIHJ4PSIyNSIgZmlsbD0iI0ZBRjlGNiIgc3Ryb2tlPSIjRTVFMkRDIiBzdHJva2Utd2lkdGg9IjIiLz4KICAgICAgPHJlY3QgeD0iMTg1IiB5PSI2NSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjM1IiBmaWxsPSIjREZDNDg4Ii8+CiAgICAgIDxjaXJjbGUgY3g9IjIwMCIgY3k9IjUwIiByPSIxNSIgZmlsbD0iI0M1QTA1OSIvPgogICAgICA8dGV4dCB4PSIyMDAiIHk9IjIxMCIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iYm9sZCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI0M1QTA1OSI+V0hJVEUgTVVTSzwvdGV4dD4KICAgIAogIDwvc3ZnPg==" alt="Imperial White Musk Crystal Elixir"></a>
+              <span class="badge">Collector Grade</span>
+            </div>
+            <div class="card-info">
+              <div>
+                <span style="font-size:0.7rem; text-transform:uppercase; color:var(--lux-gold); font-weight:600;">Private Blend</span>
+                <h3 style="margin-top:0.2rem;"><a href="product-en.html">Imperial White Musk Crystal Elixir</a></h3>
+              </div>
+              <div class="card-bottom">
+                <span style="font-weight:700; font-size:0.95rem;">850.00 SAR</span>
+                <button class="btn-add" onclick="openCart()">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+        
+          <article class="product-card">
+            <div class="card-img-wrap">
+              <a href="product-en.html"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIEFsbGlnYXRvciBMZWF0aGVyIENhcmQgSG9sZGVyIC0tPgogICAgICA8cmVjdCB4PSIxMjAiIHk9IjE3MCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSIxMjAiIHJ4PSI4IiBmaWxsPSIjMUMxQTE4IiBzdHJva2U9IiNDNUEwNTkiIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgICAgIDxwYXRoIGQ9Ik0xMjAgMjEwIEwyODAgMjEwIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMiIvPgogICAgICA8cGF0aCBkPSJNMTIwIDI0NSBMMjgwIDI0NSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICAgICAgPHRleHQgeD0iMjAwIiB5PSIyNzgiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNERkM0ODgiPkVNPC90ZXh0PgogICAgCiAgPC9zdmc+" alt="Alligator Embossed Luxury Card Case"></a>
+              
+            </div>
+            <div class="card-info">
+              <div>
+                <span style="font-size:0.7rem; text-transform:uppercase; color:var(--lux-gold); font-weight:600;">Artisan Leather</span>
+                <h3 style="margin-top:0.2rem;"><a href="product-en.html">Alligator Embossed Luxury Card Case</a></h3>
+              </div>
+              <div class="card-bottom">
+                <span style="font-weight:700; font-size:0.95rem;">1,150.00 SAR</span>
+                <button class="btn-add" onclick="openCart()">Add to Cart</button>
+              </div>
+            </div>
+          </article>
+        
+          <article class="product-card">
+            <div class="card-img-wrap">
+              <a href="product-en.html"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNDAwIDUwMCI+CiAgICA8ZGVmcz4KICAgICAgPGxpbmVhckdyYWRpZW50IGlkPSJiZ0dyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgogICAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFRkVDRTYiLz4KICAgICAgPC9saW5lYXJHcmFkaWVudD4KICAgICAgPHJhZGlhbEdyYWRpZW50IGlkPSJwZWRlc3RhbEdsb3ciIGN4PSI1MCUiIGN5PSI4MCUiIHI9IjUwJSI+CiAgICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0RGQzQ4OCIgc3RvcC1vcGFjaXR5PSIwLjMiLz4KICAgICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNGQUY5RjYiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPC9kZWZzPgogICAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9InVybCgjYmdHcmFkKSIvPgogICAgPGVsbGlwc2UgY3g9IjIwMCIgY3k9IjQyMCIgcng9IjE0MCIgcnk9IjI1IiBmaWxsPSJ1cmwoI3BlZGVzdGFsR2xvdykiLz4KICAgIAogICAgICA8IS0tIEFydGlzYW4gQnJhc3MgTWFia2hhcmEgLS0+CiAgICAgIDxwYXRoIGQ9Ik0xNTAgMjgwIEwyNTAgMjgwIEwyMzAgMzUwIEwxNzAgMzUwIFoiIGZpbGw9IiM4RTZBMjYiLz4KICAgICAgPHJlY3QgeD0iMTM1IiB5PSIyNjAiIHdpZHRoPSIxMzAiIGhlaWdodD0iMjAiIHJ4PSIzIiBmaWxsPSIjQzVBMDU5Ii8+CiAgICAgIDxwYXRoIGQ9Ik0xNDUgMjYwIFEyMDAgMTQwIDI1NSAyNjAgWiIgZmlsbD0iI0RGQzQ4OCIvPgogICAgICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjgiIGZpbGw9IiM4RTZBMjYiLz4KICAgICAgPGNpcmNsZSBjeD0iMTgwIiBjeT0iMjI1IiByPSI1IiBmaWxsPSIjOEU2QTI2Ii8+CiAgICAgIDxjaXJjbGUgY3g9IjIyMCIgY3k9IjIyNSIgcj0iNSIgZmlsbD0iIzhFNkEyNiIvPgogICAgICA8IS0tIEdvbGQgU21va2UgVGVuZHJpbHMgLS0+CiAgICAgIDxwYXRoIGQ9Ik0yMDAgMTMwIFEyMTUgOTUgMTk1IDcwIFExODUgNTAgMjAwIDMwIiBmaWxsPSJub25lIiBzdHJva2U9IiNDNUEwNTkiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuNiIvPgogICAgCiAgPC9zdmc+" alt="Artisan Pierced Brass Incense Burner"></a>
+              <span class="badge">Heritage Craft</span>
+            </div>
+            <div class="card-info">
+              <div>
+                <span style="font-size:0.7rem; text-transform:uppercase; color:var(--lux-gold); font-weight:600;">Imperial Living</span>
+                <h3 style="margin-top:0.2rem;"><a href="product-en.html">Artisan Pierced Brass Incense Burner</a></h3>
+              </div>
+              <div class="card-bottom">
+                <span style="font-weight:700; font-size:0.95rem;">720.00 SAR</span>
+                <button class="btn-add" onclick="openCart()">Add to Cart</button>
               </div>
             </div>
           </article>
         
       </div>
-    </section>
+    </div>
   </main>
 
   
@@ -685,11 +665,11 @@
       <button onclick="closeMobileNav()" style="background:none; border:none; font-size:1.6rem; cursor:pointer;">&times;</button>
     </div>
     <div class="mobile-nav-links">
-      <a href="preview-en.html" class="active">
+      <a href="preview-en.html" class="">
         <span>Home</span>
         <span>&larr;</span>
       </a>
-      <a href="categories-en.html" class="">
+      <a href="categories-en.html" class="active">
         <span>Catalog</span>
         <span>&larr;</span>
       </a>
@@ -711,7 +691,7 @@
       </a>
     </div>
     <div class="mobile-nav-footer">
-      <a href="index.html" class="btn-lang" style="display:block; text-align:center; padding:0.6rem;">
+      <a href="categories.html" class="btn-lang" style="display:block; text-align:center; padding:0.6rem;">
         التحويل إلى اللغة العربية
       </a>
     </div>
@@ -719,11 +699,11 @@
 
   <!-- Mobile Bottom Tab Bar -->
   <nav class="mobile-bottom-bar" aria-label="Mobile Tab Bar">
-    <a href="preview-en.html" class="mobile-tab-item active">
+    <a href="preview-en.html" class="mobile-tab-item ">
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
       <span>Home</span>
     </a>
-    <a href="categories-en.html" class="mobile-tab-item ">
+    <a href="categories-en.html" class="mobile-tab-item active">
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
       <span>Catalog</span>
     </a>
