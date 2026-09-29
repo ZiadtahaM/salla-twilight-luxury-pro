@@ -45,7 +45,7 @@
         {# Salla Checkout Button #}
         <salla-button 
           id="btn-checkout" 
-          href="{{ salla_checkout_url() }}" 
+          href="{{ link('checkout')|default('/checkout') }}" 
           class="w-full h-12 bg-[#C5A059] hover:bg-[#b08e4d] text-stone-950 text-sm font-bold uppercase tracking-wider transition">
           {{ trans('common.proceed_to_checkout')|default('المتابعة لإتمام الدفع الفوري') }}
         </salla-button>

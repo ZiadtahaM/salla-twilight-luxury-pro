@@ -59,7 +59,7 @@
     </a>
 
     <a 
-      href="{{ salla_checkout_url() }}" 
+      href="{{ link('checkout')|default('/cart') }}" 
       class="block text-center py-3 bg-[#C5A059] hover:bg-[#b08e4d] text-stone-950 text-xs uppercase tracking-wider font-bold transition">
       {{ trans('common.checkout_now')|default('إتمام الطلب عبر سلة برو') }}
     </a>

@@ -6,7 +6,8 @@
   <title>{{ store.name }} | {% block title %}{{ page.title|default('المتجر الرسمي') }}{% endblock %}</title>
   
   {# Salla platform injected assets and meta tags #}
-  {{ salla_header() }}
+  {% hook 'head:start' %}
+  {% hook head %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,8 +66,11 @@
       box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.08);
     }
   </style>
+  {% block styles %}{% endblock %}
+  {% hook 'head:end' %}
 </head>
 <body class="flex flex-col min-h-screen">
+  {% hook 'body:start' %}
   <a href="#main-content" class="sr-only skip-to-content">
     {{ trans('common.skip_to_content')|default('الانتقال مباشرة إلى المحتوى الأساسي') }}
   </a>
@@ -152,6 +156,7 @@
   </footer>
 
   {# Salla platform injected footer scripts and modal layers #}
-  {{ salla_footer() }}
+  {% hook 'body:end' %}
+  {% block scripts %}{% endblock %}
 </body>
 </html>
