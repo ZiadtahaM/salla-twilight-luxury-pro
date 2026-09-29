@@ -12,7 +12,10 @@ if (!fs.existsSync(DIST_DIR)) {
 
 console.log('[1/4] Auditing twilight.json schema...');
 const schema = JSON.parse(fs.readFileSync(SCHEMA_PATH, 'utf8'));
-if (!schema.components['home.luxury-hero-banner']) {
+const hasHeroComponent = Array.isArray(schema.components)
+  ? schema.components.some(c => c.path === 'home.luxury-hero-banner')
+  : !!(schema.components && schema.components['home.luxury-hero-banner']);
+if (!hasHeroComponent) {
   throw new Error('Missing component registration: home.luxury-hero-banner');
 }
 console.log('      Passed: twilight.json schema validated.');

@@ -46,7 +46,7 @@ def run_salla_theme_mission():
             return False
         try:
             data = json.loads(p.read_text(encoding="utf-8"))
-            req = ["name", "version", "author", "components"]
+            req = ["name", "version", "components", "features", "settings"]
             return all(k in data for k in req)
         except Exception:
             return False
@@ -55,10 +55,17 @@ def run_salla_theme_mission():
         p = ROOT_DIR / "twilight.json"
         try:
             data = json.loads(p.read_text(encoding="utf-8"))
-            comp = data.get("components", {}).get("home.luxury-hero-banner")
-            if not comp or not comp.get("path"):
-                return False
-            return (ROOT_DIR / comp["path"]).exists()
+            comps = data.get("components")
+            if isinstance(comps, list):
+                match = next((c for c in comps if c.get("path") == "home.luxury-hero-banner"), None)
+                if not match:
+                    return False
+                target_path = ROOT_DIR / "src" / "views" / "components" / "home" / "luxury-hero-banner.twig"
+                return target_path.exists()
+            elif isinstance(comps, dict):
+                comp = comps.get("home.luxury-hero-banner")
+                return bool(comp and (ROOT_DIR / comp.get("path", "")).exists())
+            return False
         except Exception:
             return False
 
