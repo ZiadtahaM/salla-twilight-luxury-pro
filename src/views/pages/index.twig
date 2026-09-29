@@ -1,12 +1,11 @@
-{% extends "src/views/layouts/master.twig" %}
+{% extends "layouts.master" %}
 
 {% block title %}
   {{ store.name }} | الصفحة الرئيسية
 {% endblock %}
 
 {% block content %}
-  {# Component rendering managed dynamically by Twilight Engine and Theme Editor #}
-  {% component 'home.luxury-hero-banner' %}
+  {% include 'components.home.luxury-hero-banner' %}
 
   {# Curated Showcase Section #}
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
