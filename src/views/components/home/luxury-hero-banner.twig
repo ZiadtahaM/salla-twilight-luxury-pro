@@ -1,73 +1,47 @@
 {#
   Component: Luxury Hero Banner 2.0
   Path: src/views/components/home/luxury-hero-banner.twig
-  Schema: twilight.json -> components['home.luxury-hero-banner']
 #}
 
 {% set banner = component.fields|default({}) %}
-{% set align_class = banner.text_alignment|default('center') == 'start' ? 'items-start text-start' : 'items-center text-center' %}
-{% set overlay_alpha = (banner.overlay_opacity|default(40)) / 100 %}
+{% set overlay_alpha = (banner.overlay_opacity|default(50)) / 100 %}
 
-<section 
-  aria-label="{{ banner.title|default('مجموعة الرفاهية الاستثنائية') }}" 
-  class="relative w-full overflow-hidden bg-stone-950 text-white"
->
-  {# Responsive Image with picture tag to eliminate mobile overfetching #}
-  <picture class="absolute inset-0 w-full h-full">
-    {% if banner.desktop_image %}
-      <source media="(min-width: 768px)" srcset="{{ banner.desktop_image }}">
-    {% endif %}
-    {% if banner.mobile_image %}
-      <source media="(max-width: 767px)" srcset="{{ banner.mobile_image }}">
-    {% endif %}
-    <img 
-      src="{{ banner.desktop_image|default(banner.mobile_image)|default('https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=1920&auto=format&fit=crop') }}" 
-      alt="{{ banner.image_alt|default(banner.title)|default('صورة الواجهة الرئيسية الفاخرة') }}" 
-      class="w-full h-full object-cover object-center select-none"
-      loading="eager"
-      decoding="async"
-      width="1920"
-      height="1080"
-    >
-  </picture>
+<section aria-label="{{ banner.title|default('مجموعة الرفاهية الاستثنائية') }}" class="lux-hero">
+  {# Background Image #}
+  <img 
+    src="{{ banner.desktop_image|default(banner.mobile_image)|default('https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=1920&auto=format&fit=crop') }}" 
+    alt="{{ banner.image_alt|default(banner.title)|default('صورة الواجهة الرئيسية الفاخرة') }}" 
+    class="lux-hero-bg"
+    loading="eager"
+    fetchpriority="high"
+    width="1920"
+    height="1080"
+  >
 
-  {# Contrast Protection Layer with Merchant-Controlled Opacity #}
-  <div 
-    class="absolute inset-0 bg-stone-950 transition-opacity duration-300"
-    style="opacity: {{ overlay_alpha }};"
-    aria-hidden="true"
-  ></div>
+  {# Contrast Scrim #}
+  <div class="lux-hero-scrim" style="opacity: {{ overlay_alpha }};"></div>
 
-  {# Gradient scrim for enhanced text legibility #}
-  <div 
-    class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-stone-950/20" 
-    aria-hidden="true"
-  ></div>
+  {# Content #}
+  <div class="lux-container">
+    <div class="lux-hero-content">
+      <span class="lux-eyebrow">
+        {{ banner.eyebrow|default('تصميم حصري 2026') }}
+      </span>
 
-  {# Content Container with Dynamic Alignment and Accessible Contrast #}
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-44 flex flex-col {{ align_class }} justify-center min-h-[500px] sm:min-h-[600px] lg:min-h-[700px]">
-    <span class="inline-block text-xs sm:text-sm font-semibold tracking-widest uppercase text-amber-300 mb-3 px-3 py-1 bg-black/60 backdrop-blur-sm border border-amber-300/40">
-      {{ banner.eyebrow|default('تصميم حصري 2026') }}
-    </span>
+      <h1 class="lux-hero-title">
+        {{ banner.title|default('مجموعة الرفاهية الاستثنائية') }}
+      </h1>
 
-    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white max-w-3xl leading-tight mb-4 drop-shadow-md" style="font-family: var(--font-display);">
-      {{ banner.title|default('مجموعة الرفاهية الاستثنائية') }}
-    </h1>
+      <p class="lux-hero-subtitle">
+        {{ banner.subtitle|default('حرفية استثنائية وتفاصيل حصرية مصممة لتواكب ذوقك الرفيع في عالم الأناقة المعاصرة') }}
+      </p>
 
-    <p class="text-base sm:text-lg lg:text-xl text-stone-200 max-w-2xl font-light mb-8 leading-relaxed drop-shadow">
-      {{ banner.subtitle|default('حرفية استثنائية وتفاصيل حصرية مصممة لتواكب ذوقك الرفيع في عالم الأناقة المعاصرة') }}
-    </p>
-
-    <div class="pt-2">
-      <a 
-        href="{{ banner.cta_url|default('/categories') }}" 
-        class="inline-flex items-center justify-center px-8 py-4 text-sm font-semibold tracking-wider uppercase text-stone-950 bg-amber-400 hover:bg-amber-300 focus:bg-amber-300 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-stone-900 shadow-lg"
-      >
-        <span>{{ banner.cta_label|default('اكتشف التشكيلة الحصرية') }}</span>
-        <svg class="w-4 h-4 ms-2 rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
-      </a>
+      <div>
+        <a href="{{ banner.cta_url|default('/categories') }}" class="lux-cta-btn">
+          <span>{{ banner.cta_label|default('اكتشف التشكيلة الحصرية') }}</span>
+          <span>&larr;</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
