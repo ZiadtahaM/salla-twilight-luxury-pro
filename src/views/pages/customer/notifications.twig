@@ -1,0 +1,21 @@
+{% extends "layouts.master" %}
+{% block title %}{{ trans('pages.notifications')|default('الإشعارات') }}{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <h1 class="text-2xl font-display font-semibold text-luxury-text mb-8">{{ trans('pages.notifications')|default('الإشعارات') }}</h1>
+  {% if notifications.list is not empty %}
+    <div class="space-y-3">
+      {% for notif in notifications.list %}
+        <div class="flex gap-4 p-4 border border-luxury-border {{ notif.is_read ? 'opacity-60' : '' }}">
+          <div class="flex-1">
+            <p class="text-sm text-luxury-text">{{ notif.message }}</p>
+            <time class="text-xs text-luxury-muted mt-1 block">{{ notif.created_at }}</time>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center text-luxury-muted py-20">{{ trans('pages.no_notifications')|default('لا توجد إشعارات.') }}</p>
+  {% endif %}
+</div>
+{% endblock %}

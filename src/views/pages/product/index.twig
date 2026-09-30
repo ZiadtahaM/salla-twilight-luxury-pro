@@ -1,0 +1,23 @@
+{% extends "layouts.master" %}
+{% block title %}{{ trans('pages.product_listing')|default('المنتجات') }}{% endblock %}
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <header class="mb-10 text-center luxury-section-heading">
+    <h1>{{ category.name|default(trans('pages.all_products')|default('جميع المنتجات')) }}</h1>
+  </header>
+  <div class="flex flex-col lg:flex-row gap-8">
+    <aside class="lg:w-64 flex-shrink-0">
+      <salla-filters></salla-filters>
+    </aside>
+    <div class="flex-1">
+      <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-6">
+        {% for product in products.list %}
+          <salla-product-card product-id="{{ product.id }}"></salla-product-card>
+        {% else %}
+          <p class="col-span-full text-center text-luxury-muted py-16">{{ trans('pages.no_products')|default('لا توجد منتجات.') }}</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

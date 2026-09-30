@@ -1,0 +1,11 @@
+{% extends "layouts.master" %}
+{% block title %}{{ trans('pages.wallet')|default('محفظتي') }}{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <h1 class="text-2xl font-display font-semibold text-luxury-text mb-8">{{ trans('pages.wallet')|default('محفظتي') }}</h1>
+  <div class="border border-luxury-border p-8 text-center mb-8">
+    <p class="text-xs uppercase tracking-wider text-luxury-muted mb-2">{{ trans('pages.wallet_balance')|default('الرصيد') }}</p>
+    <p class="text-4xl font-display font-semibold text-luxury-text">{{ wallet.balance.formatted|default('0.00') }}</p>
+  </div>
+</div>
+{% endblock %}

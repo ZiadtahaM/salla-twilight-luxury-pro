@@ -1,0 +1,29 @@
+{% extends "layouts.master" %}
+{% block title %}{{ trans('pages.blog')|default('المدونة') }}{% endblock %}
+{% block content %}
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <header class="mb-12 text-center luxury-section-heading">
+    <h1>{{ trans('pages.blog')|default('المدونة') }}</h1>
+  </header>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for post in posts.list %}
+      <article class="group border border-luxury-border hover:border-luxury-accent transition-colors duration-300">
+        {% if post.image %}
+          <a href="{{ post.url }}" class="block overflow-hidden aspect-[4/3]">
+            <img src="{{ post.image }}" alt="{{ post.title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+          </a>
+        {% endif %}
+        <div class="p-5">
+          <time class="text-xs text-luxury-muted uppercase tracking-wider">{{ post.created_at|date('d M Y') }}</time>
+          <h2 class="mt-2 text-base font-display font-semibold text-luxury-text group-hover:text-luxury-accent transition-colors">
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          </h2>
+          <p class="mt-2 text-sm text-luxury-muted line-clamp-2">{{ post.excerpt }}</p>
+        </div>
+      </article>
+    {% else %}
+      <p class="col-span-full text-center text-luxury-muted py-16">{{ trans('pages.no_posts')|default('لا توجد مقالات بعد.') }}</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

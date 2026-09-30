@@ -1,0 +1,21 @@
+{% extends "layouts.master" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+<article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <header class="mb-8">
+    <time class="text-xs text-luxury-muted uppercase tracking-wider">{{ post.created_at|date('d M Y') }}</time>
+    <h1 class="mt-3 text-3xl sm:text-4xl font-display font-semibold text-luxury-text leading-tight">{{ post.title }}</h1>
+    {% if post.image %}
+      <img src="{{ post.image }}" alt="{{ post.title }}" class="mt-8 w-full aspect-video object-cover" loading="lazy">
+    {% endif %}
+  </header>
+  <div class="prose prose-stone max-w-none text-luxury-text/90 leading-relaxed">
+    {{ post.content|raw }}
+  </div>
+  <footer class="mt-12 pt-8 border-t border-luxury-border">
+    <a href="{{ link('blog')|default('/blog') }}" class="text-sm text-luxury-muted hover:text-luxury-accent transition-colors">
+      &larr; {{ trans('common.back_to_blog')|default('العودة إلى المدونة') }}
+    </a>
+  </footer>
+</article>
+{% endblock %}

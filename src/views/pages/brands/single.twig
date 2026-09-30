@@ -1,0 +1,22 @@
+{% extends "layouts.master" %}
+{% block title %}{{ brand.name }}{% endblock %}
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="flex items-center gap-6 mb-12 pb-8 border-b border-luxury-border">
+    {% if brand.logo %}
+      <img src="{{ brand.logo }}" alt="{{ brand.name }}" class="h-16 w-auto object-contain" loading="eager">
+    {% endif %}
+    <div>
+      <h1 class="text-2xl font-display font-semibold text-luxury-text">{{ brand.name }}</h1>
+      {% if brand.description %}<p class="text-sm text-luxury-muted mt-1">{{ brand.description }}</p>{% endif %}
+    </div>
+  </div>
+  <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-6">
+    {% for product in products.list %}
+      <salla-product-card product-id="{{ product.id }}"></salla-product-card>
+    {% else %}
+      <p class="col-span-full text-center text-luxury-muted py-16">{{ trans('pages.no_products')|default('لا توجد منتجات.') }}</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

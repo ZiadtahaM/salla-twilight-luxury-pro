@@ -1,0 +1,18 @@
+{% extends "layouts.master" %}
+{% block title %}{{ trans('pages.thank_you')|default('شكراً لك') }}{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+  <div class="w-16 h-16 mx-auto mb-8 flex items-center justify-center border border-luxury-accent">
+    <svg class="w-8 h-8 text-luxury-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"/>
+    </svg>
+  </div>
+  <h1 class="text-3xl font-display font-semibold text-luxury-text mb-4">{{ trans('pages.order_confirmed')|default('تم تأكيد طلبك') }}</h1>
+  <p class="text-luxury-muted mb-2">{{ trans('pages.order_number')|default('رقم الطلب') }}: <strong class="text-luxury-text">#{{ order.reference_id }}</strong></p>
+  <p class="text-sm text-luxury-muted mb-10">{{ trans('pages.thank_you_message')|default('سيصلك تأكيد عبر البريد الإلكتروني. شكراً لثقتك بنا.') }}</p>
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+    <a href="{{ order.url }}" class="btn-luxury-outline">{{ trans('common.view_order')|default('عرض الطلب') }}</a>
+    <a href="{{ link('home')|default('/') }}" class="btn-luxury-primary">{{ trans('common.continue_shopping')|default('مواصلة التسوق') }}</a>
+  </div>
+</div>
+{% endblock %}

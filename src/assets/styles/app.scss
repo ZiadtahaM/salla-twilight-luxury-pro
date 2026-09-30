@@ -1,0 +1,211 @@
+/* =============================================
+ * Luxury Pro — Main SCSS Entry Point
+ * Compiled by webpack → public/app.css
+ * ============================================= */
+
+/* 1. Tailwind base layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 2. Design token layer (CSS custom properties) */
+@layer base {
+    :root {
+        /* Typography */
+        --font-body: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --font-display: 'Cormorant Garamond', 'IBM Plex Sans Arabic', serif;
+
+        /* Luxury palette — overridable via twilight.json theme settings */
+        --luxury-primary: #1A1A1A;
+        --luxury-accent:  #D4AF37;
+        --luxury-bg:      #FAF9F6;
+        --luxury-surface: #FFFFFF;
+        --luxury-border:  #E5E2DC;
+        --luxury-text:    #1C1B1A;
+        --luxury-muted:   #6E6B66;
+
+        /* Map to Salla's primary color system so Salla components inherit the theme */
+        --color-primary:         var(--luxury-primary);
+        --color-primary-dark:    #000000;
+        --color-primary-light:   #3A3A3A;
+        --color-primary-reverse: #FFFFFF;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        font-family: var(--font-body);
+        background-color: var(--luxury-bg);
+        color: var(--luxury-text);
+        line-height: 1.6;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Focus management — accessibility baseline */
+    :focus-visible {
+        outline: 2px solid var(--luxury-accent);
+        outline-offset: 2px;
+    }
+
+    /* Skip link */
+    .skip-to-content {
+        position: absolute;
+        transform: translateY(-100%);
+        transition: transform 0.2s;
+        &:focus {
+            transform: translateY(0);
+            top: 1rem;
+            left: 1rem;
+            z-index: 9999;
+            padding: 0.75rem 1.25rem;
+            background: var(--luxury-primary);
+            color: #FFFFFF;
+            border: 1px solid var(--luxury-accent);
+        }
+    }
+}
+
+/* 3. Salla Web Component overrides */
+@layer components {
+    salla-button {
+        --salla-primary-color: var(--luxury-primary);
+        --salla-primary-hover-color: #000000;
+        --salla-border-radius: 0px;
+    }
+
+    salla-product-card {
+        --card-bg: var(--luxury-surface);
+        --card-border-color: var(--luxury-border);
+        --card-border-radius: 0px;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.08);
+        }
+    }
+
+    salla-cart-summary {
+        cursor: pointer;
+    }
+
+    /* Luxury header */
+    .luxury-header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--luxury-border);
+        transition: box-shadow 0.3s ease;
+
+        &.scrolled {
+            box-shadow: 0 4px 24px -8px rgba(0, 0, 0, 0.06);
+        }
+    }
+
+    /* Display font utility */
+    .font-display {
+        font-family: var(--font-display);
+    }
+
+    /* Luxury button variants */
+    .btn-luxury {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 2rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+        cursor: pointer;
+
+        &-primary {
+            @extend .btn-luxury;
+            background: var(--luxury-primary);
+            color: #FFFFFF;
+            &:hover { background: var(--luxury-accent); }
+        }
+
+        &-outline {
+            @extend .btn-luxury;
+            background: transparent;
+            color: var(--luxury-primary);
+            border-color: var(--luxury-primary);
+            &:hover { background: var(--luxury-primary); color: #FFFFFF; }
+        }
+
+        &-ghost {
+            @extend .btn-luxury;
+            background: transparent;
+            color: var(--luxury-muted);
+            &:hover { color: var(--luxury-primary); }
+        }
+    }
+
+    /* Gold accent divider */
+    .luxury-divider {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        &::before, &::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--luxury-border);
+        }
+        &-gold::before, &-gold::after {
+            background: linear-gradient(90deg, transparent, var(--luxury-accent), transparent);
+        }
+    }
+
+    /* Section heading pattern */
+    .luxury-section-heading {
+        h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+        }
+        &::after {
+            content: '';
+            display: block;
+            width: 3rem;
+            height: 1px;
+            background: var(--luxury-accent);
+            margin: 1rem auto 0;
+        }
+    }
+}
+
+/* 4. Animations */
+@layer utilities {
+    .animate-fade-up {
+        animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-shimmer {
+        background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+        background-size: 200% 100%;
+        animation: shimmer 1.8s infinite;
+    }
+
+    @keyframes shimmer {
+        0%   { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+
+    /* RTL-aware spacing utilities */
+    [dir="rtl"] .rtl\:text-right { text-align: right; }
+    [dir="ltr"] .ltr\:text-left  { text-align: left; }
+}

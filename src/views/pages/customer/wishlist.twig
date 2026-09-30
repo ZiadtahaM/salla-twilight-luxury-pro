@@ -1,0 +1,20 @@
+{% extends "layouts.master" %}
+{% block title %}{{ trans('pages.wishlist')|default('المفضلة') }}{% endblock %}
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <h1 class="text-2xl font-display font-semibold text-luxury-text mb-8">{{ trans('pages.wishlist')|default('المفضلة') }}</h1>
+  {% if wishlist.list is not empty %}
+    <div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-6">
+      {% for item in wishlist.list %}
+        <salla-product-card product-id="{{ item.product.id }}"></salla-product-card>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="text-center py-20 text-luxury-muted">
+      <p class="text-4xl mb-4">🤍</p>
+      <p>{{ trans('pages.empty_wishlist')|default('مفضلتك فارغة.') }}</p>
+      <a href="{{ link('home')|default('/') }}" class="btn-luxury-primary mt-6 inline-flex">{{ trans('common.explore_products')|default('اكتشف المنتجات') }}</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+# Dependencies — never commit node_modules
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/settings.json
+*.swp
+*.swo
+
+# Build artifacts from non-theme scripts
+dist/
+*.pyc
+__pycache__/
+agent_suit/suit/__pycache__/
+
+# Environment
+.env
+.env.local
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+
+# NOTE: public/ is NOT gitignored.
+# Salla pulls compiled assets from git directly — public/ must be committed.

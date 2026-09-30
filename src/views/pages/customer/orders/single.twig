@@ -1,0 +1,32 @@
+{% extends "layouts.master" %}
+{% block title %}{{ trans('pages.order')|default('الطلب') }} #{{ order.reference_id }}{% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="flex items-center gap-4 mb-8">
+    <a href="{{ link('orders')|default('/profile/orders') }}" class="text-sm text-luxury-muted hover:text-luxury-accent transition-colors">&larr; {{ trans('common.back_to_orders')|default('الطلبات') }}</a>
+  </div>
+  <div class="flex items-center justify-between mb-8 pb-6 border-b border-luxury-border">
+    <h1 class="text-xl font-display font-semibold text-luxury-text">{{ trans('pages.order')|default('الطلب') }} #{{ order.reference_id }}</h1>
+    <span class="text-xs uppercase tracking-wider px-3 py-1.5 border border-luxury-border text-luxury-muted">{{ order.status.name }}</span>
+  </div>
+  <div class="space-y-4 mb-8">
+    {% for item in order.items %}
+      <div class="flex gap-4 py-4 border-b border-luxury-border/50">
+        {% if item.product.image %}
+          <img src="{{ item.product.image }}" alt="{{ item.product.name }}" class="w-20 h-20 object-cover border border-luxury-border flex-shrink-0" loading="lazy">
+        {% endif %}
+        <div class="flex-1">
+          <p class="text-sm font-medium text-luxury-text">{{ item.product.name }}</p>
+          <p class="text-xs text-luxury-muted mt-1">{{ trans('common.quantity')|default('الكمية') }}: {{ item.quantity }}</p>
+        </div>
+        <p class="text-sm font-semibold text-luxury-text">{{ item.total.formatted }}</p>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="bg-luxury-surface border border-luxury-border p-6 space-y-3">
+    <div class="flex justify-between text-sm"><span class="text-luxury-muted">{{ trans('common.subtotal')|default('المجموع الفرعي') }}</span><span class="text-luxury-text">{{ order.sub_total.formatted }}</span></div>
+    {% if order.shipping_cost %}<div class="flex justify-between text-sm"><span class="text-luxury-muted">{{ trans('common.shipping')|default('الشحن') }}</span><span class="text-luxury-text">{{ order.shipping_cost.formatted }}</span></div>{% endif %}
+    <div class="flex justify-between text-sm font-semibold pt-3 border-t border-luxury-border"><span class="text-luxury-text">{{ trans('common.total')|default('الإجمالي') }}</span><span class="text-luxury-text">{{ order.total.formatted }}</span></div>
+  </div>
+</div>
+{% endblock %}
