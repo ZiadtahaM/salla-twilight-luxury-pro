@@ -598,79 +598,18 @@
     توصيل فاخر ومجاني لكافة الطلبات | ضمان الأصالة والجودة العالية
   </aside>
 
-  {# ── Luxury Header ── #}
-  <header role="banner" class="lux-header">
-    <div class="lux-container lux-header-inner">
-      <div class="lux-nav-group">
-        <a href="{{ store.url|default('/') }}" class="lux-logo">
-          {% if store.logo %}
-            <img src="{{ store.logo }}" alt="{{ store.name }}" style="height: 38px; width: auto;" loading="eager">
-          {% else %}
-            <span>{{ store.name }}</span>
-          {% endif %}
-        </a>
-
-        <nav role="navigation" aria-label="Main Navigation">
-          <ul class="lux-nav-links" style="display: flex;">
-            <li><a href="{{ link('home')|default('/') }}" class="lux-nav-link">{{ trans('common.home')|default('الرئيسية') }}</a></li>
-            <li><a href="{{ link('categories')|default('/categories') }}" class="lux-nav-link">{{ trans('common.categories')|default('المجموعات') }}</a></li>
-            <li><a href="{{ link('offers')|default('/offers') }}" class="lux-nav-link">{{ trans('common.offers')|default('العروض') }}</a></li>
-          </ul>
-        </nav>
-      </div>
-
-      <div class="lux-actions">
-        <salla-search></salla-search>
-        <a href="{{ user.language.code == 'ar' ? '?lang=en' : '?lang=ar' }}" class="lux-btn-pill">
-          {{ user.language.code == 'ar' ? 'English' : 'عربي' }}
-        </a>
-        <salla-cart-summary></salla-cart-summary>
-        <a href="{{ user.is_logged_in ? link('profile')|default('/profile') : link('login')|default('/login') }}" class="lux-btn-pill">
-          {{ user.is_logged_in ? trans('common.my_account')|default('حسابي') : trans('common.login')|default('تسجيل الدخول') }}
-        </a>
-      </div>
-    </div>
-  </header>
+  {% component 'header.header' %}
 
   <main id="main-content" role="main" style="flex-grow: 1;">
     {% block content %}{% endblock %}
   </main>
 
-  {# ── Luxury Footer ── #}
-  <footer role="contentinfo" class="lux-footer">
-    <div class="lux-container">
-      <div class="lux-footer-grid">
-        <div class="lux-footer-brand">
-          <h3>{{ store.name }}</h3>
-          <p>{{ store.description|default('وجهتك الأولى لأرقى المجموعات الحصرية المصنوعة بأعلى معايير الحرفية والرفاهية.') }}</p>
-        </div>
-        <div class="lux-footer-col">
-          <h4>{{ trans('common.customer_care')|default('خدمة العملاء') }}</h4>
-          <ul class="lux-footer-links">
-            <li><a href="{{ link('orders.tracking')|default('/orders/tracking') }}">{{ trans('common.track_order')|default('تتبع الطلب') }}</a></li>
-            <li><a href="{{ link('pages', 'shipping')|default('/pages/shipping') }}">{{ trans('common.shipping_policy')|default('سياسة الشحن') }}</a></li>
-            <li><a href="{{ link('pages', 'returns')|default('/pages/returns') }}">{{ trans('common.returns')|default('الإرجاع والاستبدال') }}</a></li>
-          </ul>
-        </div>
-        <div class="lux-footer-col">
-          <h4>{{ trans('common.payment_security')|default('الدفع الموثوق') }}</h4>
-          <p style="font-size: 0.8125rem; color: #9C9890; line-height: 1.6; margin-bottom: 1.25rem;">
-            {{ trans('common.secure_checkout_notice')|default('جميع المعاملات مشفرة ومحمية ببروتوكولات الأمان المعتمدة في منصة سلة.') }}
-          </p>
-          <div style="font-size: 0.72rem; color: var(--luxury-accent-light); letter-spacing: 0.08em; font-weight: 500;">
-            MADA · VISA · MASTERCARD · APPLE PAY
-          </div>
-        </div>
-      </div>
-
-      <div class="lux-footer-bottom">
-        <p>&copy; {{ "now"|date("Y") }} {{ store.name }}. {{ trans('common.all_rights_reserved')|default('جميع الحقوق محفوظة.') }}</p>
-        <p>Luxury Pro · Powered by Salla Twilight</p>
-      </div>
-    </div>
-  </footer>
+  {% component 'footer.footer' %}
 
   <script src="{{ 'app.js' | asset }}" defer></script>
+  <salla-offer-modal data-testid="store-offer-modal"></salla-offer-modal>
+  <salla-search data-testid="store-search-modal"></salla-search>
+  <salla-login-modal data-testid="store-login-modal"></salla-login-modal>
   {% block scripts %}{% endblock %}
   {% hook 'body:end' %}
 </body>
