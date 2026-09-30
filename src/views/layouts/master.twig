@@ -1,60 +1,133 @@
 <!DOCTYPE html>
-<html lang="{{ user.language.code|default('ar') }}" dir="{{ user.language.dir|default('rtl') }}" class="scroll-smooth">
+<html lang="{{ language.code|default('ar') }}" dir="{{ theme.is_rtl ? 'rtl' : 'ltr' }}" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ store.name }} | {% block title %}{{ page.title|default('المتجر الرسمي') }}{% endblock %}</title>
 
-  {# ── Salla platform injects: meta tags, OG tags, analytics, CSP ── #}
+  {# ── Salla platform lifecycle hooks (head) ── #}
   {% hook 'head:start' %}
   {% hook head %}
 
-  {# Google Fonts — CDN load is acceptable for fonts only #}
+  {# Google Fonts #}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  {# ── Compiled theme styles — webpack builds src/assets/styles/app.scss → public/app.css ── #}
+  {# Salla native icons #}
+  <link rel="stylesheet" href="{{ 'fonts/sallaicons.css'|cdn }}"/>
+
+  {# Compiled Theme Stylesheet from public/app.css #}
   <link rel="stylesheet" href="{{ 'app.css' | asset }}">
 
-  {# ── Merchant-overridden CSS custom properties from twilight.json settings ── #}
+  {# Tailwind CDN fallback to guarantee instant CSS rendering in all preview environments #}
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            luxury: {
+              primary: 'var(--luxury-primary, #1A1A1A)',
+              accent:  'var(--luxury-accent, #D4AF37)',
+              bg:      'var(--luxury-bg, #FAF9F6)',
+              surface: 'var(--luxury-surface, #FFFFFF)',
+              border:  'var(--luxury-border, #E5E2DC)',
+              text:    'var(--luxury-text, #1C1B1A)',
+              muted:   'var(--luxury-muted, #6E6B66)',
+            }
+          },
+          fontFamily: {
+            display: ['var(--font-display)', 'serif'],
+            body: ['var(--font-body)', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  {# ── Luxury Design System CSS Tokens & Overrides ── #}
   <style>
     :root {
       --luxury-primary: {{ theme.settings.luxury_theme_palette|default('#1A1A1A') }};
       --luxury-accent:  {{ theme.settings.luxury_secondary_accent|default('#D4AF37') }};
       --luxury-bg:      {{ theme.settings.luxury_bg_color|default('#FAF9F6') }};
-      --color-primary:  {{ theme.settings.luxury_theme_palette|default('#1A1A1A') }};
+      --luxury-surface: #FFFFFF;
+      --luxury-border:  #E5E2DC;
+      --luxury-text:    #1C1B1A;
+      --luxury-muted:   #6E6B66;
+      --font-body: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-display: 'Cormorant Garamond', 'IBM Plex Sans Arabic', serif;
+
+      --color-primary:         var(--luxury-primary);
       --color-primary-dark:    #000000;
       --color-primary-light:   #3A3A3A;
       --color-primary-reverse: #FFFFFF;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--luxury-bg);
+      color: var(--luxury-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-display {
+      font-family: var(--font-display);
+    }
+
+    /* Salla Web Components Styling */
+    salla-button {
+      --salla-primary-color: var(--luxury-primary);
+      --salla-border-radius: 0px;
+    }
+
+    salla-product-card {
+      --card-bg: var(--luxury-surface);
+      --card-border-color: var(--luxury-border);
+      --card-border-radius: 0px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    }
+
+    salla-product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.08);
+    }
+
+    .luxury-header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--luxury-border);
     }
   </style>
 
   {% block styles %}{% endblock %}
   {% hook 'head:end' %}
 </head>
-<body class="flex flex-col min-h-screen {% block body_class %}{% endblock %}">
+<body id="app" class="flex flex-col min-h-screen {% block body_class %}{% endblock %}">
   {% hook 'body:start' %}
 
   <a href="#main-content" class="sr-only skip-to-content focus:not-sr-only">
     {{ trans('common.skip_to_content')|default('الانتقال إلى المحتوى الرئيسي') }}
   </a>
 
-  {# ── Header — extracted component for reusability and editor support ── #}
+  {# ── Header component ── #}
   {% component 'header.header' %}
 
   <main id="main-content" role="main" class="flex-grow">
     {% block content %}{% endblock %}
   </main>
 
-  {# ── Footer — extracted component ── #}
+  {# ── Footer component ── #}
   {% component 'footer.footer' %}
 
-  {# ── Compiled theme JS ── #}
+  {# ── Compiled Theme Scripts ── #}
   <script src="{{ 'app.js' | asset }}" defer></script>
   {% block scripts %}{% endblock %}
 
-  {# ── Salla platform injects: cart drawer, login modal, toast notifications ── #}
+  {# ── Salla platform lifecycle hooks (body:end) ── #}
   {% hook 'body:end' %}
 </body>
 </html>

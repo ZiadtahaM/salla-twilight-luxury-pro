@@ -32,7 +32,11 @@
     "start_shopping": "Start Shopping",
     "explore_products": "Explore Products",
     "continue_shopping": "Continue Shopping",
-    "view_order": "View Order"
+    "view_order": "View Order",
+    "selected_pieces": "Seasonal Selections",
+    "featured_products": "Featured Masterpieces",
+    "view_all": "View All Pieces",
+    "add_to_cart": "Add to Bag"
   },
   "pages": {
     "product_listing": "Products",

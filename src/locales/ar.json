@@ -32,7 +32,11 @@
     "start_shopping": "ابدأ التسوق",
     "explore_products": "اكتشف المنتجات",
     "continue_shopping": "مواصلة التسوق",
-    "view_order": "عرض الطلب"
+    "view_order": "عرض الطلب",
+    "selected_pieces": "مختارات الموسم",
+    "featured_products": "القطع الأكثر تميزاً",
+    "view_all": "مشاهدة كافة المعروضات",
+    "add_to_cart": "إضافة للسلة"
   },
   "pages": {
     "product_listing": "المنتجات",
