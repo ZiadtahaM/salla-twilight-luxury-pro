@@ -16,6 +16,7 @@ dist/
 *.pyc
 __pycache__/
 agent_suit/suit/__pycache__/
+agent_suit/worklogs/
 
 # Environment
 .env
