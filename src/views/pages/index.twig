@@ -1,28 +1,31 @@
 {% extends "layouts.master" %}
 
 {% block title %}
-  {{ store.name }} | الصفحة الرئيسية
+  {{ store.name }} | الرئيسية
 {% endblock %}
 
 {% block content %}
   {# 1. Luxury Hero Banner Component #}
   {% include 'components.home.luxury-hero-banner' %}
 
-  {# 2. Trust / Highlights Bar #}
+  {# 2. Brand Quality & Craftsmanship Highlights #}
   <section class="lux-trust-bar">
     <div class="lux-container">
       <div class="lux-trust-grid">
         <div class="lux-trust-item">
-          <h4>حرفية يدوية أصيلة</h4>
-          <p>مواد مختارة بعناية فائقة تلبي أرقى معايير الجودة العالمية.</p>
+          <div class="lux-trust-icon">✦</div>
+          <h4>حرفية استثنائية</h4>
+          <p>مواد أصلية مختارة بعناية فائقة تلبي أرقى معايير الجودة العالمية.</p>
         </div>
         <div class="lux-trust-item">
-          <h4>توصيل فاخر ومضمون</h4>
-          <p>شحن سريع وتغليف هدايا ملكي يصلك أينما كنت.</p>
+          <div class="lux-trust-icon">◈</div>
+          <h4>شحن خاص وسريع</h4>
+          <p>توصيل فاخر وتغليف ملكي يحافظ على سلامة مشترياتك الثمينة.</p>
         </div>
         <div class="lux-trust-item">
-          <h4>دفع موثوق ومحمي</h4>
-          <p>خيارات دفع متعددة وآمنة عبر شبكات الدفع الوطنية والعالمية.</p>
+          <div class="lux-trust-icon">❖</div>
+          <h4>دفع آمن ومشفر</h4>
+          <p>معاملات موثوقة ومحمية ببروتوكولات الأمان العالمية ومنصة سلة.</p>
         </div>
       </div>
     </div>
@@ -32,23 +35,15 @@
   <section class="lux-section">
     <div class="lux-container">
       <div class="lux-section-header">
-        <div>
-          <span class="lux-section-tag">
-            {{ trans('common.selected_pieces')|default('مختارات الموسم') }}
-          </span>
-          <h2 class="lux-section-title">
-            {{ trans('common.featured_products')|default('القطع الأكثر تميزاً') }}
-          </h2>
-        </div>
-        <div>
-          <a href="{{ link('categories')|default('/categories') }}" class="lux-section-link">
-            <span>{{ trans('common.view_all')|default('مشاهدة كافة المعروضات') }}</span>
-            <span>&larr;</span>
-          </a>
-        </div>
+        <span class="lux-section-tag">
+          {{ trans('common.selected_pieces')|default('مختارات الموسم') }}
+        </span>
+        <h2 class="lux-section-title">
+          {{ trans('common.featured_products')|default('القطع الأكثر تميزاً') }}
+        </h2>
       </div>
 
-      {# 4. Products Grid #}
+      {# 4. Luxury Products Grid #}
       <div class="lux-product-grid">
         {% for product in products|slice(0, 4) %}
           <article class="lux-card">
@@ -65,6 +60,8 @@
               </a>
               {% if product.promotion_title %}
                 <span class="lux-card-badge">{{ product.promotion_title }}</span>
+              {% else %}
+                <span class="lux-card-badge">حصري</span>
               {% endif %}
             </div>
             
@@ -87,35 +84,105 @@
             </div>
           </article>
         {% else %}
-          {# Elegant placeholder cards when store has no products #}
-          {% for i in 1..4 %}
-            <article class="lux-card">
-              <div class="lux-card-media">
-                <img 
-                  src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=600&auto=format&fit=crop" 
-                  alt="منتج فاخر" 
-                  class="lux-card-img"
-                  loading="lazy"
-                >
-                <span class="lux-card-badge">حصري</span>
+          {# High-fashion curated mockups when no store products are created yet #}
+          <article class="lux-card">
+            <div class="lux-card-media">
+              <img 
+                src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=600&auto=format&fit=crop" 
+                alt="عطر نيش فاخر" 
+                class="lux-card-img"
+                loading="lazy"
+              >
+              <span class="lux-card-badge">إصدار خاص</span>
+            </div>
+            <div class="lux-card-body">
+              <div>
+                <h3 class="lux-card-title">عطر العود الملكي النادر</h3>
+                <p class="lux-card-sub">عطور نيش حصرية</p>
               </div>
-              <div class="lux-card-body">
-                <div>
-                  <h3 class="lux-card-title">ساعة فخمة بإصدار محدود</h3>
-                  <p class="lux-card-sub">إكسسوارات فاخرة</p>
-                </div>
-                <div class="lux-card-footer">
-                  <span class="lux-card-price">١٬٨٥٠ ر.س</span>
-                  <button type="button" class="lux-btn-pill">إضافة للسلة</button>
-                </div>
+              <div class="lux-card-footer">
+                <span class="lux-card-price">١٬٢٥٠ ر.س</span>
+                <button type="button" class="lux-btn-pill">إضافة للسلة</button>
               </div>
-            </article>
-          {% endfor %}
+            </div>
+          </article>
+
+          <article class="lux-card">
+            <div class="lux-card-media">
+              <img 
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=600&auto=format&fit=crop" 
+                alt="ساعة يد سويسرية" 
+                class="lux-card-img"
+                loading="lazy"
+              >
+              <span class="lux-card-badge">مختارات</span>
+            </div>
+            <div class="lux-card-body">
+              <div>
+                <h3 class="lux-card-title">ساعة كرونوغراف إصدار محدود</h3>
+                <p class="lux-card-sub">ساعات راقية</p>
+              </div>
+              <div class="lux-card-footer">
+                <span class="lux-card-price">٣٬٤٠٠ ر.س</span>
+                <button type="button" class="lux-btn-pill">إضافة للسلة</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="lux-card">
+            <div class="lux-card-media">
+              <img 
+                src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=600&auto=format&fit=crop" 
+                alt="حقيبة يد جلدية فاخرة" 
+                class="lux-card-img"
+                loading="lazy"
+              >
+              <span class="lux-card-badge">جديد</span>
+            </div>
+            <div class="lux-card-body">
+              <div>
+                <h3 class="lux-card-title">حقيبة يد جلد طبيعي محبوك</h3>
+                <p class="lux-card-sub">مصنوعات جلدية</p>
+              </div>
+              <div class="lux-card-footer">
+                <span class="lux-card-price">٢٬١٠٠ ر.س</span>
+                <button type="button" class="lux-btn-pill">إضافة للسلة</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="lux-card">
+            <div class="lux-card-media">
+              <img 
+                src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=600&auto=format&fit=crop" 
+                alt="قلادة ذهبية مرصعة" 
+                class="lux-card-img"
+                loading="lazy"
+              >
+              <span class="lux-card-badge">حرفية يدوية</span>
+            </div>
+            <div class="lux-card-body">
+              <div>
+                <h3 class="lux-card-title">قلادة ذهب عيار ١٨ مرصعة</h3>
+                <p class="lux-card-sub">مجوهرات راقية</p>
+              </div>
+              <div class="lux-card-footer">
+                <span class="lux-card-price">٤٬٨٠٠ ر.س</span>
+                <button type="button" class="lux-btn-pill">إضافة للسلة</button>
+              </div>
+            </div>
+          </article>
         {% endfor %}
+      </div>
+
+      <div style="text-align: center; margin-top: 3.5rem;">
+        <a href="{{ link('categories')|default('/categories') }}" class="lux-btn-pill" style="padding: 0.85rem 2.25rem; font-size: 0.8125rem;">
+          {{ trans('common.view_all')|default('مشاهدة كافة المعروضات') }}
+        </a>
       </div>
     </div>
   </section>
 
-  {# 5. Twilight Dynamic Components Injection Tag #}
+  {# 5. Dynamic Salla Twilight Components #}
   {% component home %}
 {% endblock %}

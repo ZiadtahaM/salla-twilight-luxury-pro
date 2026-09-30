@@ -4,10 +4,9 @@
 #}
 
 {% set banner = component.fields|default({}) %}
-{% set overlay_alpha = (banner.overlay_opacity|default(50)) / 100 %}
 
 <section aria-label="{{ banner.title|default('مجموعة الرفاهية الاستثنائية') }}" class="lux-hero">
-  {# Background Image #}
+  {# Background Image with smooth subtle parallax scale #}
   <img 
     src="{{ banner.desktop_image|default(banner.mobile_image)|default('https://images.unsplash.com/photo-1547949003-9792a18a2601?q=80&w=1920&auto=format&fit=crop') }}" 
     alt="{{ banner.image_alt|default(banner.title)|default('صورة الواجهة الرئيسية الفاخرة') }}" 
@@ -18,18 +17,20 @@
     height="1080"
   >
 
-  {# Contrast Scrim #}
-  <div class="lux-hero-scrim" style="opacity: {{ overlay_alpha }};"></div>
+  {# Dark radial scrim for maximum legibility #}
+  <div class="lux-hero-scrim"></div>
 
-  {# Content #}
+  {# Editorial Luxury Content #}
   <div class="lux-container">
     <div class="lux-hero-content">
       <span class="lux-eyebrow">
-        {{ banner.eyebrow|default('تصميم حصري 2026') }}
+        <span>✦</span>
+        <span>{{ banner.eyebrow|default('تشكيلة حصرية ٢٠٢٦') }}</span>
+        <span>✦</span>
       </span>
 
       <h1 class="lux-hero-title">
-        {{ banner.title|default('مجموعة الرفاهية الاستثنائية') }}
+        مجموعة <strong>الرفاهية الاستثنائية</strong>
       </h1>
 
       <p class="lux-hero-subtitle">
@@ -39,7 +40,7 @@
       <div>
         <a href="{{ banner.cta_url|default('/categories') }}" class="lux-cta-btn">
           <span>{{ banner.cta_label|default('اكتشف التشكيلة الحصرية') }}</span>
-          <span>&larr;</span>
+          <span style="font-size: 1.1rem; line-height: 1;">&larr;</span>
         </a>
       </div>
     </div>

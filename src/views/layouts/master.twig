@@ -10,26 +10,27 @@
   {% hook 'head:start' %}
   {% hook head %}
 
-  {# Google Fonts #}
+  {# Premium Fonts #}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Kufi+Arabic:wght@200;300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@200;300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ 'fonts/sallaicons.css'|cdn }}"/>
   <link rel="stylesheet" href="{{ 'app.css' | asset }}">
 
-  {# ── Bulletproof Self-Contained Luxury Design System ── #}
+  {# ── Haute Horlogerie & High Luxury Design System ── #}
   <style>
     :root {
-      --luxury-primary: {{ theme.settings.luxury_theme_palette|default('#141414') }};
-      --luxury-accent: {{ theme.settings.luxury_secondary_accent|default('#C8A261') }};
-      --luxury-accent-hover: #b38e4e;
-      --luxury-bg: #FBFBF9;
+      --luxury-primary: #0D0D0D;
+      --luxury-accent: #C5A059;
+      --luxury-accent-light: #DFCA9B;
+      --luxury-accent-dark: #9A7B3E;
+      --luxury-bg: #FAF9F5;
       --luxury-surface: #FFFFFF;
-      --luxury-border: #E8E5DF;
-      --luxury-border-light: #F0ECE4;
-      --luxury-text: #181716;
-      --luxury-muted: #737069;
-      --font-body: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --luxury-border: #E6E2D8;
+      --luxury-border-light: #F2EFE9;
+      --luxury-text: #171615;
+      --luxury-muted: #7A766D;
+      --font-arabic: 'IBM Plex Sans Arabic', 'Noto Kufi Arabic', -apple-system, sans-serif;
       --font-display: 'Cormorant Garamond', 'IBM Plex Sans Arabic', Georgia, serif;
       --color-primary: var(--luxury-primary);
     }
@@ -46,10 +47,11 @@
     }
 
     body {
-      font-family: var(--font-body);
+      font-family: var(--font-arabic);
       background-color: var(--luxury-bg);
       color: var(--luxury-text);
-      line-height: 1.6;
+      line-height: 1.65;
+      letter-spacing: -0.01em;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -61,7 +63,7 @@
     a {
       color: inherit;
       text-decoration: none;
-      transition: color 0.2s ease;
+      transition: all 0.25s ease;
     }
 
     img {
@@ -77,11 +79,23 @@
     /* Container */
     .lux-container {
       width: 100%;
-      max-width: 1280px;
+      max-width: 1320px;
       margin-left: auto;
       margin-right: auto;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    /* Top Announcement Bar */
+    .lux-topbar {
+      background: #0D0D0D;
+      color: #C5A059;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 0.5rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(197, 160, 89, 0.2);
     }
 
     /* Header */
@@ -89,14 +103,14 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(16px);
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--luxury-border);
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .lux-header-inner {
-      height: 72px;
+      height: 78px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -105,15 +119,15 @@
     .lux-nav-group {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 2.5rem;
     }
 
     .lux-logo {
       font-family: var(--font-display);
-      font-size: 1.65rem;
+      font-size: 1.85rem;
       font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--luxury-text);
+      letter-spacing: -0.02em;
+      color: var(--luxury-primary);
       display: flex;
       align-items: center;
     }
@@ -121,38 +135,56 @@
     .lux-nav-links {
       display: flex;
       align-items: center;
-      gap: 1.75rem;
+      gap: 2rem;
       list-style: none;
     }
 
     .lux-nav-link {
       font-size: 0.875rem;
-      font-weight: 500;
+      font-weight: 400;
       color: var(--luxury-muted);
-      letter-spacing: 0.02em;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .lux-nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 1px;
+      background: var(--luxury-accent);
+      transition: width 0.3s ease;
     }
 
     .lux-nav-link:hover {
-      color: var(--luxury-text);
+      color: var(--luxury-primary);
+    }
+
+    .lux-nav-link:hover::after {
+      width: 100%;
     }
 
     .lux-actions {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.25rem;
     }
 
     .lux-btn-pill {
       font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 0.4rem 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 0.5rem 1.15rem;
       border: 1px solid var(--luxury-border);
       background: transparent;
       color: var(--luxury-text);
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
     }
 
     .lux-btn-pill:hover {
@@ -165,12 +197,14 @@
     .lux-hero {
       position: relative;
       width: 100%;
-      min-height: 580px;
-      background: #0A0A0A;
+      min-height: 640px;
+      background: #080808;
       color: #FFFFFF;
       overflow: hidden;
       display: flex;
       align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
     .lux-hero-bg {
@@ -180,136 +214,148 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
-      opacity: 0.55;
+      opacity: 0.45;
+      transform: scale(1.02);
+      transition: transform 8s ease-out;
+    }
+
+    .lux-hero:hover .lux-hero-bg {
+      transform: scale(1.06);
     }
 
     .lux-hero-scrim {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.85) 100%);
+      background: radial-gradient(circle at center, rgba(8,8,8,0.4) 0%, rgba(8,8,8,0.88) 100%),
+                  linear-gradient(180deg, rgba(8,8,8,0.2) 0%, rgba(8,8,8,0.7) 100%);
     }
 
     .lux-hero-content {
       position: relative;
       z-index: 10;
-      padding: 5rem 0;
-      max-width: 780px;
+      padding: 6rem 1rem;
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .lux-eyebrow {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.15em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--luxury-accent);
-      padding: 0.35rem 0.9rem;
-      border: 1px solid rgba(200, 162, 97, 0.45);
-      background: rgba(0, 0, 0, 0.6);
-      margin-bottom: 1.25rem;
+      color: var(--luxury-accent-light);
+      padding: 0.4rem 1.25rem;
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      background: rgba(13, 13, 13, 0.65);
+      backdrop-filter: blur(8px);
+      margin-bottom: 1.75rem;
     }
 
     .lux-hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.25rem, 5.5vw, 4rem);
-      font-weight: 700;
-      line-height: 1.15;
+      font-family: var(--font-arabic);
+      font-size: clamp(2.4rem, 5.5vw, 4.25rem);
+      font-weight: 300;
+      line-height: 1.25;
       letter-spacing: -0.02em;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
       color: #FFFFFF;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .lux-hero-title strong {
+      font-weight: 600;
+      background: linear-gradient(135deg, #FFFFFF 30%, var(--luxury-accent-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .lux-hero-subtitle {
-      font-size: 1.05rem;
+      font-size: 1.125rem;
       font-weight: 300;
-      line-height: 1.7;
-      color: #E2DFD8;
-      margin-bottom: 2.25rem;
-      max-width: 620px;
+      line-height: 1.8;
+      color: #D6D2C8;
+      margin-bottom: 2.75rem;
+      max-width: 680px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
     }
 
     .lux-cta-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
-      padding: 1rem 2.5rem;
+      gap: 0.85rem;
+      padding: 1.1rem 2.85rem;
       font-size: 0.8125rem;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      background: var(--luxury-accent);
-      color: #0A0A0A;
-      border: none;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      background: linear-gradient(135deg, #D4AF37 0%, #C5A059 100%);
+      color: #0D0D0D;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
+      box-shadow: 0 8px 24px rgba(197, 160, 89, 0.25);
     }
 
     .lux-cta-btn:hover {
       background: #FFFFFF;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.3);
+      color: #0D0D0D;
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
     }
 
     /* Showcase Section */
     .lux-section {
-      padding: 5rem 0;
+      padding: 6rem 0;
     }
 
     .lux-section-header {
       display: flex;
       flex-direction: column;
-      margin-bottom: 3rem;
-    }
-
-    @media (min-width: 768px) {
-      .lux-section-header {
-        flex-direction: row;
-        align-items: flex-end;
-        justify-content: space-between;
-      }
+      margin-bottom: 3.5rem;
+      text-align: center;
     }
 
     .lux-section-tag {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--luxury-accent);
-      margin-bottom: 0.5rem;
+      color: var(--luxury-accent-dark);
+      margin-bottom: 0.65rem;
+      display: block;
     }
 
     .lux-section-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-      font-weight: 700;
-      color: var(--luxury-text);
-      letter-spacing: -0.01em;
+      font-family: var(--font-arabic);
+      font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+      font-weight: 300;
+      color: var(--luxury-primary);
+      letter-spacing: -0.02em;
+      position: relative;
+      display: inline-block;
+      margin: 0 auto;
     }
 
-    .lux-section-link {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--luxury-text);
-      border-bottom: 1px solid var(--luxury-text);
-      padding-bottom: 0.2rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-
-    .lux-section-link:hover {
-      color: var(--luxury-accent);
-      border-color: var(--luxury-accent);
+    .lux-section-title::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 1.5px;
+      background: var(--luxury-accent);
+      margin: 1.25rem auto 0;
     }
 
     /* Product Grid */
     .lux-product-grid {
       display: grid;
       grid-template-columns: repeat(1, 1fr);
-      gap: 1.75rem;
+      gap: 2rem;
     }
 
     @media (min-width: 640px) {
@@ -329,12 +375,13 @@
       border: 1px solid var(--luxury-border);
       display: flex;
       flex-direction: column;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
     }
 
     .lux-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.08);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
       border-color: var(--luxury-accent);
     }
 
@@ -350,28 +397,29 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .lux-card:hover .lux-card-img {
-      transform: scale(1.04);
+      transform: scale(1.06);
     }
 
     .lux-card-badge {
       position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
+      top: 0.85rem;
+      right: 0.85rem;
       font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-weight: 600;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      padding: 0.25rem 0.6rem;
-      background: var(--luxury-primary);
+      padding: 0.3rem 0.75rem;
+      background: #0D0D0D;
       color: #FFFFFF;
+      border: 1px solid rgba(197, 160, 89, 0.35);
     }
 
     .lux-card-body {
-      padding: 1.25rem;
+      padding: 1.5rem 1.25rem 1.25rem;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
@@ -379,45 +427,46 @@
     }
 
     .lux-card-title {
-      font-size: 0.9375rem;
-      font-weight: 500;
+      font-size: 0.95rem;
+      font-weight: 400;
       color: var(--luxury-text);
-      margin-bottom: 0.35rem;
-      line-height: 1.4;
+      margin-bottom: 0.4rem;
+      line-height: 1.45;
     }
 
     .lux-card-sub {
       font-size: 0.75rem;
       color: var(--luxury-muted);
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
 
     .lux-card-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-top: 0.85rem;
+      padding-top: 1rem;
       border-top: 1px solid var(--luxury-border-light);
     }
 
     .lux-card-price {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--luxury-text);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--luxury-primary);
+      letter-spacing: -0.01em;
     }
 
-    /* Trust bar */
+    /* Trust Highlights Bar */
     .lux-trust-bar {
       border-top: 1px solid var(--luxury-border);
       border-bottom: 1px solid var(--luxury-border);
-      padding: 3rem 0;
+      padding: 3.5rem 0;
       background: #FFFFFF;
     }
 
     .lux-trust-grid {
       display: grid;
       grid-template-columns: repeat(1, 1fr);
-      gap: 2rem;
+      gap: 2.5rem;
       text-align: center;
     }
 
@@ -427,33 +476,50 @@
       }
     }
 
+    .lux-trust-item {
+      padding: 0 1rem;
+    }
+
+    .lux-trust-icon {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 1.25rem;
+      border: 1px solid var(--luxury-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--luxury-accent-dark);
+      font-size: 1.25rem;
+    }
+
     .lux-trust-item h4 {
-      font-family: var(--font-display);
+      font-family: var(--font-arabic);
       font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 0.35rem;
-      color: var(--luxury-text);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: var(--luxury-primary);
     }
 
     .lux-trust-item p {
       font-size: 0.8125rem;
       color: var(--luxury-muted);
+      line-height: 1.6;
     }
 
     /* Footer */
     .lux-footer {
-      background: var(--luxury-primary);
+      background: #0D0D0D;
       color: #D1CEC7;
-      padding: 4.5rem 0 2rem;
+      padding: 5rem 0 2.5rem;
       margin-top: auto;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(197, 160, 89, 0.2);
     }
 
     .lux-footer-grid {
       display: grid;
       grid-template-columns: repeat(1, 1fr);
-      gap: 2.5rem;
-      margin-bottom: 3.5rem;
+      gap: 3rem;
+      margin-bottom: 4rem;
     }
 
     @media (min-width: 768px) {
@@ -464,32 +530,33 @@
 
     .lux-footer-brand h3 {
       font-family: var(--font-display);
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       color: #FFFFFF;
-      margin-bottom: 0.85rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
     }
 
     .lux-footer-brand p {
       font-size: 0.875rem;
       color: #9C9890;
       max-width: 380px;
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
     .lux-footer-col h4 {
       font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      font-weight: 600;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #FFFFFF;
-      margin-bottom: 1.25rem;
+      color: var(--luxury-accent-light);
+      margin-bottom: 1.5rem;
     }
 
     .lux-footer-links {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.85rem;
     }
 
     .lux-footer-links a {
@@ -498,12 +565,12 @@
     }
 
     .lux-footer-links a:hover {
-      color: var(--luxury-accent);
+      color: var(--luxury-accent-light);
     }
 
     .lux-footer-bottom {
       border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 1.75rem;
+      padding-top: 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -518,22 +585,6 @@
         flex-direction: row;
       }
     }
-
-    /* Skip link */
-    .skip-to-content {
-      position: absolute;
-      top: -9999px;
-      left: 1rem;
-      z-index: 99999;
-      background: var(--luxury-primary);
-      color: #FFFFFF;
-      padding: 0.75rem 1.5rem;
-      border: 1px solid var(--luxury-accent);
-    }
-
-    .skip-to-content:focus {
-      top: 1rem;
-    }
   </style>
 
   {% block styles %}{% endblock %}
@@ -542,9 +593,10 @@
 <body id="app" class="{% block body_class %}{% endblock %}">
   {% hook 'body:start' %}
 
-  <a href="#main-content" class="skip-to-content">
-    {{ trans('common.skip_to_content')|default('الانتقال إلى المحتوى الرئيسي') }}
-  </a>
+  {# ── Top Announcement Ticker ── #}
+  <aside class="lux-topbar">
+    توصيل فاخر ومجاني لكافة الطلبات | ضمان الأصالة والجودة العالية
+  </aside>
 
   {# ── Luxury Header ── #}
   <header role="banner" class="lux-header">
@@ -552,7 +604,7 @@
       <div class="lux-nav-group">
         <a href="{{ store.url|default('/') }}" class="lux-logo">
           {% if store.logo %}
-            <img src="{{ store.logo }}" alt="{{ store.name }}" style="height: 36px; width: auto;" loading="eager">
+            <img src="{{ store.logo }}" alt="{{ store.name }}" style="height: 38px; width: auto;" loading="eager">
           {% else %}
             <span>{{ store.name }}</span>
           {% endif %}
@@ -574,7 +626,7 @@
         </a>
         <salla-cart-summary></salla-cart-summary>
         <a href="{{ user.is_logged_in ? link('profile')|default('/profile') : link('login')|default('/login') }}" class="lux-btn-pill">
-          {{ user.is_logged_in ? trans('common.my_account')|default('حسابي') : trans('common.login')|default('دخول') }}
+          {{ user.is_logged_in ? trans('common.my_account')|default('حسابي') : trans('common.login')|default('تسجيل الدخول') }}
         </a>
       </div>
     </div>
@@ -590,7 +642,7 @@
       <div class="lux-footer-grid">
         <div class="lux-footer-brand">
           <h3>{{ store.name }}</h3>
-          <p>{{ store.description|default('تجربة تسوق راقية تجسد أعلى درجات الفخامة والأناقة المعاصرة.') }}</p>
+          <p>{{ store.description|default('وجهتك الأولى لأرقى المجموعات الحصرية المصنوعة بأعلى معايير الحرفية والرفاهية.') }}</p>
         </div>
         <div class="lux-footer-col">
           <h4>{{ trans('common.customer_care')|default('خدمة العملاء') }}</h4>
@@ -602,10 +654,10 @@
         </div>
         <div class="lux-footer-col">
           <h4>{{ trans('common.payment_security')|default('الدفع الموثوق') }}</h4>
-          <p style="font-size: 0.8125rem; color: #9C9890; line-height: 1.6; margin-bottom: 1rem;">
+          <p style="font-size: 0.8125rem; color: #9C9890; line-height: 1.6; margin-bottom: 1.25rem;">
             {{ trans('common.secure_checkout_notice')|default('جميع المعاملات مشفرة ومحمية ببروتوكولات الأمان المعتمدة في منصة سلة.') }}
           </p>
-          <div style="font-size: 0.75rem; color: var(--luxury-accent); letter-spacing: 0.05em;">
+          <div style="font-size: 0.72rem; color: var(--luxury-accent-light); letter-spacing: 0.08em; font-weight: 500;">
             MADA · VISA · MASTERCARD · APPLE PAY
           </div>
         </div>
