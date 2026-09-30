@@ -1,37 +1,85 @@
 {% extends "layouts.master" %}
 
 {% block title %}
-  {{ store.name }} | الرئيسية
+  {{ store.name }} | المتجر الرسمي
 {% endblock %}
 
 {% block content %}
-  {# 1. Luxury Hero Banner Component #}
+  {# ── 1. Luxury Hero Section ── #}
   {% include 'components.home.luxury-hero-banner' %}
 
-  {# 2. Brand Quality & Craftsmanship Highlights #}
+  {# ── 2. Brand Value & Craftsmanship Pillars ── #}
   <section class="lux-trust-bar">
     <div class="lux-container">
       <div class="lux-trust-grid">
         <div class="lux-trust-item">
           <div class="lux-trust-icon">✦</div>
-          <h4>حرفية استثنائية</h4>
-          <p>مواد أصلية مختارة بعناية فائقة تلبي أرقى معايير الجودة العالمية.</p>
+          <h4>حرفية وتصميم حصري</h4>
+          <p>قطع فاخرة ومواد نادرة تم انتقاؤها بعناية فائقة لتلائم أصحاب الذوق الرفيع.</p>
         </div>
         <div class="lux-trust-item">
           <div class="lux-trust-icon">◈</div>
-          <h4>شحن خاص وسريع</h4>
-          <p>توصيل فاخر وتغليف ملكي يحافظ على سلامة مشترياتك الثمينة.</p>
+          <h4>توصيل فاخر وسريع</h4>
+          <p>شحن مخصص وتغليف هدايا ملكي يضمن وصول مقتنياتك الثمينة بأعلى درجات الأمان.</p>
         </div>
         <div class="lux-trust-item">
           <div class="lux-trust-icon">❖</div>
-          <h4>دفع آمن ومشفر</h4>
-          <p>معاملات موثوقة ومحمية ببروتوكولات الأمان العالمية ومنصة سلة.</p>
+          <h4>دفع موثوق ومحمي</h4>
+          <p>معاملات مالية مشفرة بنسبة ١٠٠٪ تدعم مدى، فيزا، ماستركارد، وأبل باي.</p>
         </div>
       </div>
     </div>
   </section>
 
-  {# 3. Curated Showcase Section #}
+  {# ── 3. Seasonal Curated Collections Banner Grid ── #}
+  <section class="lux-section" style="padding-bottom: 2rem;">
+    <div class="lux-container">
+      <div class="lux-section-header">
+        <span class="lux-section-tag">التشكيلات الحصرية</span>
+        <h2 class="lux-section-title">مجموعات مختارة بعناية</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+        <div style="position: relative; height: 380px; overflow: hidden; background: #0D0D0D; border: 1px solid var(--luxury-border);">
+          <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800&auto=format&fit=crop" alt="العطور الفاخرة" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.65; transition: transform 0.6s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(13,13,13,0.9) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem;">
+            <span style="font-size: 0.75rem; color: var(--luxury-accent); letter-spacing: 0.15em; text-transform: uppercase;">إصدار محدود</span>
+            <h3 style="font-family: var(--font-arabic); font-size: 1.5rem; color: #FFFFFF; font-weight: 500; margin: 0.35rem 0 1rem;">عطور النيش الملكية</h3>
+            <a href="{{ link('categories')|default('/categories') }}" style="color: #FFFFFF; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--luxury-accent); width: fit-content; padding-bottom: 0.2rem;">
+              <span>اكتشف المجموعة</span>
+              <span>&larr;</span>
+            </a>
+          </div>
+        </div>
+
+        <div style="position: relative; height: 380px; overflow: hidden; background: #0D0D0D; border: 1px solid var(--luxury-border);">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop" alt="الساعات الراقية" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.65; transition: transform 0.6s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(13,13,13,0.9) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem;">
+            <span style="font-size: 0.75rem; color: var(--luxury-accent); letter-spacing: 0.15em; text-transform: uppercase;">صناعة سويسرية</span>
+            <h3 style="font-family: var(--font-arabic); font-size: 1.5rem; color: #FFFFFF; font-weight: 500; margin: 0.35rem 0 1rem;">ساعات يد كرونوغراف</h3>
+            <a href="{{ link('categories')|default('/categories') }}" style="color: #FFFFFF; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--luxury-accent); width: fit-content; padding-bottom: 0.2rem;">
+              <span>اكتشف المجموعة</span>
+              <span>&larr;</span>
+            </a>
+          </div>
+        </div>
+
+        <div style="position: relative; height: 380px; overflow: hidden; background: #0D0D0D; border: 1px solid var(--luxury-border);">
+          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=800&auto=format&fit=crop" alt="المجوهرات الفاخرة" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.65; transition: transform 0.6s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(13,13,13,0.9) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 2rem;">
+            <span style="font-size: 0.75rem; color: var(--luxury-accent); letter-spacing: 0.15em; text-transform: uppercase;">ذهب عيار ١٨</span>
+            <h3 style="font-family: var(--font-arabic); font-size: 1.5rem; color: #FFFFFF; font-weight: 500; margin: 0.35rem 0 1rem;">مجوهرات وألماس</h3>
+            <a href="{{ link('categories')|default('/categories') }}" style="color: #FFFFFF; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.1em; display: inline-flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--luxury-accent); width: fit-content; padding-bottom: 0.2rem;">
+              <span>اكتشف المجموعة</span>
+              <span>&larr;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# ── 4. Featured Masterpieces Product Grid ── #}
   <section class="lux-section">
     <div class="lux-container">
       <div class="lux-section-header">
@@ -43,7 +91,6 @@
         </h2>
       </div>
 
-      {# 4. Luxury Products Grid #}
       <div class="lux-product-grid">
         {% for product in products|slice(0, 4) %}
           <article class="lux-card">
@@ -183,6 +230,30 @@
     </div>
   </section>
 
-  {# 5. Dynamic Salla Twilight Components #}
+  {# ── 5. Editorial Brand Story / Atelier Section ── #}
+  <section style="background: #0D0D0D; color: #FFFFFF; padding: 6rem 0;">
+    <div class="lux-container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 4rem; align-items: center;">
+        <div>
+          <span style="font-size: 0.75rem; color: var(--luxury-accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; display: block;">قصة الدار</span>
+          <h2 style="font-family: var(--font-arabic); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.3; margin-bottom: 1.5rem;">
+            أصالة الحرفة مع <strong>روح العصر</strong>
+          </h2>
+          <p style="color: #BDB9B0; font-size: 1rem; line-height: 1.8; margin-bottom: 2rem;">
+            نبتكر قطعاً فنية فريدة تعكس أعلى درجات الإتقان والتميز. كل تصميم يحكي قصة إبداع تبدأ من اختيار أنقى الخامات وتمر بأنامل أمهر الحرفيين لتصل إليك بمثالية لا تضاهى.
+          </p>
+          <a href="{{ link('pages', 'about')|default('/pages/about') }}" class="lux-cta-btn" style="padding: 0.9rem 2.25rem;">
+            <span>اقرأ المزيد عن الدار</span>
+            <span>&larr;</span>
+          </a>
+        </div>
+        <div style="position: relative; border: 1px solid rgba(197, 160, 89, 0.3); padding: 1rem;">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop" alt="أتيليه التصميم الفاخر" style="width: 100%; height: 420px; object-fit: cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# ── 6. Twilight Dynamic Merchant Components ── #}
   {% component home %}
 {% endblock %}
