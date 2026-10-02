@@ -3,7 +3,6 @@
         "ar": "المتجر الفاخر برو",
         "en": "Luxury Pro Bespoke"
     },
-    "version": "1.0.0",
     "repository": "https://github.com/ZiadtahaM/salla-twilight-luxury-pro",
     "author_email": "dev@ziadtaha.pro",
     "support_url": "https://github.com/ZiadtahaM/salla-twilight-luxury-pro",
@@ -344,7 +343,8 @@
                     "format": "textarea",
                     "description": "الوصف التعريفي"
                 }
-            ]
+            ],
+            "image": "https://cdn.salla.network/images/themes/raed/preview-images/images-slider-enhancement.png"
         },
         {
             "key": "186b3f4f-25cf-4d3c-abca-cef7eed6f0ab",
