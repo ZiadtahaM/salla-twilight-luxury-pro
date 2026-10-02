@@ -1,0 +1,59 @@
+{
+  "status": 200,
+  "success": true,
+  "data": {
+    "id": 1252059893,
+    "is_public": true,
+    "is_beta": false,
+    "is_already_submitted": false,
+    "is_landing_template": false,
+    "price": 150,
+    "old_price": null,
+    "discount_start_date": null,
+    "discount_end_date": null,
+    "theme_url": "https://github.com/ZiadtahaM/salla-twilight-luxury-pro",
+    "livechat_url": null,
+    "documentation_url": null,
+    "author_email": "dev@ziadtaha.pro",
+    "author_mobile": null,
+    "service": null,
+    "repo_url": "https://github.com/ZiadtahaM/salla-twilight-luxury-pro",
+    "install_url": "https://s.salla.sa/marketplace/themes/direct/1252059893",
+    "extra_features": null,
+    "preview_store_id": null,
+    "status": "development",
+    "show_instructions": true,
+    "is_salla_account": false,
+    "publications_count": 0,
+    "pending_publication": null,
+    "framework": {
+      "label": {
+        "ar": "Twig",
+        "en": "Twig"
+      },
+      "value": "twig"
+    },
+    "categories": [],
+    "name": {
+      "ar": "المتجر الفاخر برو",
+      "en": "Luxury Pro Bespoke"
+    },
+    "short_description": {
+      "ar": "قالب فاخر مصمم بأعلى معايير الحرفية الرقمية وتجربة تسوق راقية لمتاجر سلة برو.",
+      "en": "Bespoke high-end luxury theme for Salla Pro stores with RTL/LTR precision and full accessibility."
+    },
+    "description": {
+      "ar": "",
+      "en": ""
+    },
+    "support_description": {
+      "ar": "",
+      "en": ""
+    },
+    "logo": null,
+    "screenshots": [],
+    "sample_stores": [],
+    "publication": null,
+    "publications": []
+  }
+}
