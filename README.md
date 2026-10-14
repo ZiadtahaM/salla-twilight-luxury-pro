@@ -44,4 +44,4 @@ pnpm run harness:git
 pnpm run test:harness
 ```
 
-Refer to `SALLA_OPERATIONAL_TRUTH.md` for architectural boundaries, cloud dependency flow, and operational verification standards.
+Refer to `SALLA_OPERATIONAL_TRUTH.md` for architectural boundaries, cloud dependency flow, and operational verification standards. The operational skill `salla-portal-harness` governs all cloud synchronization and human-in-the-loop checkpoints.
