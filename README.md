@@ -23,8 +23,25 @@ salla theme preview
 salla theme watch
 ```
 
-## Quality Assurance & Verification
-Run local validation checks:
+## Quality Assurance and Verification Harness
+
+Theme integrity is verified across seven deterministic tiers via the Salla Verification Harness:
+
 ```bash
-node .github/workflows/twilight-ci.yml
+# Run full seven-tier verification matrix
+pnpm run harness
+
+# Run static theme validator
+pnpm run harness:validate
+
+# Run environment and CLI inspector
+pnpm run harness:env
+
+# Run git remote synchronization check
+pnpm run harness:git
+
+# Run automated harness unit test suite
+pnpm run test:harness
 ```
+
+Refer to `SALLA_OPERATIONAL_TRUTH.md` for architectural boundaries, cloud dependency flow, and operational verification standards.

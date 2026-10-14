@@ -26,5 +26,9 @@ agent_suit/worklogs/
 npm-debug.log*
 pnpm-debug.log*
 
+# Scratch
+.scratch/
+scratch/
+
 # NOTE: public/ is NOT gitignored.
 # Salla pulls compiled assets from git directly — public/ must be committed.
